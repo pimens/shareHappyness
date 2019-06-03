@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, AsyncStorage, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, AsyncStorage, StyleSheet, TouchableOpacity, TextInput,Image } from 'react-native';
 import { openDatabase } from 'react-native-sqlite-storage';
 import { connect } from 'react-redux'
-
+import ImagePicker from 'react-native-image-picker';
 class Login extends Component {
   static navigationOptions = {
     drawerLockMode: 'locked-close'
@@ -13,16 +13,96 @@ class Login extends Component {
       name: 'catat.db',
       location: 'default',
       createFromLocation: '~www/catat.db',
+
     });
     this.state = {
       db: db,
-      curentPengeluaran : []
+      curentPengeluaran : [],
+      filePath: {},
     };
   }
   componentDidMount() {
     this.refreshData();
     console.warn(this.props);
   }
+  chooseFile = () => {
+    var options = {
+      title: 'Select Image',
+      customButtons: [
+        { name: 'customOptionKey', title: 'Choose Photo from Custom Option' },
+      ],
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.showImagePicker(options, response => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+        alert('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+        alert('ImagePicker Error: ' + response.error);
+      } else if (response.customButton) {
+        console.log('User tapped custom button: ', response.customButton);
+        alert(response.customButton);
+      } else {
+        let source = response;
+        this.setState({
+          filePath: source,
+        });
+      }
+    });
+  };
+
+  launchCamera = () => {
+    var options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchCamera(options, (response) => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+        alert('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+        alert('ImagePicker Error: ' + response.error);
+      } else {
+        let source = response;
+        this.setState({
+          filePath: source,
+        });
+      }
+    });
+  };
+
+  launchLibrary = () => {
+    var options = {
+      storageOptions: {
+        skipBackup: true,
+        path: 'images',
+      },
+    };
+    ImagePicker.launchImageLibrary(options, (response) => {
+      console.log('Response = ', response);
+      if (response.didCancel) {
+        console.log('User cancelled image picker');
+        alert('User cancelled image picker');
+      } else if (response.error) {
+        console.log('ImagePicker Error: ', response.error);
+        alert('ImagePicker Error: ' + response.error);
+      } else {
+        let source = response;
+        this.setState({
+          filePath: source,
+        });
+      }
+    });
+  };
   refreshData = () => {    
     this.state.db.transaction(tx => {
       tx.executeSql("SELECT * FROM catatan", [], (tx, results) => {
@@ -69,15 +149,25 @@ class Login extends Component {
           />
           <TouchableOpacity
             style={{ backgroundColor: "red" }}
-            onPress={this.props.addData}>
+            onPress={this.launchLibrary.bind(this)}>
+             {/* onPress={this.props.addData}> */}
             <Text style={{ color: "white" }}>Edit Data {this.props.count}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+              onPress={this.chooseFile.bind(this)}>
+            <Text>Choose File</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ backgroundColor: "red" }}
             onPress={() => this.props.navigation.navigate('Home')}>
             <Text style={{ color: "white" }}>Edit Data {this.props.count}</Text>
           </TouchableOpacity>
-         
+          <Image
+            source={{
+              uri: 'data:image/jpeg;base64,' + this.state.filePath.data,
+            }}
+            style={{ width: 100, height: 100 }}
+          />
         </View>
 
       </View>

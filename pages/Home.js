@@ -12,10 +12,7 @@ class Home extends Component {
   componentDidMount() {
     console.warn(this.props.navigation.state.routeName);
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-  }
-  // componentWillUnmount() {
-  //   BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
-  // }
+  } 
   handleBackPress = () => {    
     BackHandler.exitApp()
   }

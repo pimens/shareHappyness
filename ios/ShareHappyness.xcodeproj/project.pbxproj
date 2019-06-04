@@ -61,6 +61,7 @@
 		E365D023878E4BB2A7F3DA44 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 04C90481D6FC471DBCD21327 /* Zocial.ttf */; };
 		71B7B1EF239C4622B22FA049 /* libSQLite.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8963522ADE9447BBA40047C6 /* libSQLite.a */; };
 		F86AD2A8E1074103B9D83688 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8164F2ABAF74D73BDFE8BED /* libRNImagePicker.a */; };
+		32924D3AFB874435ADE3938B /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636D456A2F14446BB4DBD985 /* libRNGoogleSignin.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -393,6 +394,8 @@
 		8963522ADE9447BBA40047C6 /* libSQLite.a */ = {isa = PBXFileReference; name = "libSQLite.a"; path = "libSQLite.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		6DE318B126434DAB8DA34FE5 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		F8164F2ABAF74D73BDFE8BED /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		59E80E3F879D41DBBA61D29E /* RNGoogleSignin.xcodeproj */ = {isa = PBXFileReference; name = "RNGoogleSignin.xcodeproj"; path = "../node_modules/react-native-google-signin/ios/RNGoogleSignin.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		636D456A2F14446BB4DBD985 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; name = "libRNGoogleSignin.a"; path = "libRNGoogleSignin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -424,6 +427,7 @@
 				AA818396D07D457C870F3CD2 /* libRNGestureHandler.a in Frameworks */,
 				71B7B1EF239C4622B22FA049 /* libSQLite.a in Frameworks */,
 				F86AD2A8E1074103B9D83688 /* libRNImagePicker.a in Frameworks */,
+				32924D3AFB874435ADE3938B /* libRNGoogleSignin.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,6 +621,7 @@
 				17C9C96A167747D09BE5C139 /* RNGestureHandler.xcodeproj */,
 				A6DD316F6D7942A7A1C774E2 /* SQLite.xcodeproj */,
 				6DE318B126434DAB8DA34FE5 /* RNImagePicker.xcodeproj */,
+				59E80E3F879D41DBBA61D29E /* RNGoogleSignin.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1293,12 +1298,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Debug;
@@ -1324,12 +1331,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Release;
@@ -1355,6 +1364,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Debug;
@@ -1379,6 +1389,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Release;
@@ -1412,12 +1423,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Debug;
@@ -1451,12 +1464,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Release;
@@ -1489,12 +1504,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Debug;
@@ -1527,12 +1544,14 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\react-native-gesture-handler\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-sqlite-storage\src\ios",
 					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-google-signin\ios\RNGoogleSignin",
 				);
 			};
 			name = Release;

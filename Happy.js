@@ -38,27 +38,31 @@ const styles = StyleSheet.create({
 const MyDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: Home,
-    // navigationOptions: {
-    //   drawerLabel: 'Beranda',
-    //   drawerIcon: ({ tintColor }) => (
-    //     <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
-    //   )
-    // }
+    navigationOptions: {
+      drawerLabel: 'Beranda',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+      )
+    }
   },
   Login: {
     screen: Login,
     navigationOptions: {
       header: null,
       drawerLabel: () => null,    
-      drawerLockMode: 'locked-close'
- 
-      // drawerIcon: ({ tintColor }) => (
-      //   <Icon name="md-copy" style={{ fontSize: 25, color: tintColor }} />
-      // )
+      drawerLockMode: 'locked-close' 
+    }
+  },
+  Splash: {
+    screen: SplashScreen,
+    navigationOptions: {
+      header: null,
+      drawerLabel: () => null,    
+      drawerLockMode: 'locked-close' 
     }
   },
 }, {
-    initialRouteName: 'Login',
+    initialRouteName: 'Splash',
     drawerPosition: 'left',
     contentComponent: CustomContent,
     unmountInactiveRoutes: true,
@@ -88,19 +92,20 @@ export default class Happy extends React.Component {
 
     };
   }  
-  // componentWillMount() {
-  //   setTimeout(() => {
-  //     //IF FALSE NAVIGATE TO ERROR
-  //     if (true) {
-  //       this.setState({
-  //         view: <AppContainer />
-  //       })
-  //     }
-  //   }, 800) //TIME OF WAITING
-  // }
+  componentWillMount() {
+    // setTimeout(() => {
+    //   //IF FALSE NAVIGATE TO ERROR
+    //   if (true) {
+    //     this.setState({
+    //       view: <AppContainer />
+    //     })
+    //   }
+    // }, 800) //TIME OF WAITING
+  }
   render() {
     return (
-        <AppContainer />
+      this.state.view
+        // <AppContainer />
     )
   }
 

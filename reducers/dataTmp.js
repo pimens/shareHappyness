@@ -1,6 +1,8 @@
 const initialState = {
     count: 50,
-    dataStaf: [],
+    userData: {
+        nama:'n'
+    },
     da: [],
     editStaf: false
 }
@@ -8,7 +10,7 @@ const dataTmp = (state = initialState, action) => {
     switch (action.type) {
         case 'ADD_TO_CART':
             return Object.assign({}, state, {
-                count: state.count + 1
+                userData: action.data
             })
         case 'REMOVE_FROM_CART':
             return Object.assign({}, state, {

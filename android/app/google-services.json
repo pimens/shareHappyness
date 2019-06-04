@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "605323385202",
+    "firebase_url": "https://sharehappyness-32b4d.firebaseio.com",
+    "project_id": "sharehappyness-32b4d",
+    "storage_bucket": "sharehappyness-32b4d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:605323385202:android:2b15234494c82fe8",
+        "android_client_info": {
+          "package_name": "com.sharehappyness"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "605323385202-t76066ueoj08p9nulnoj5av0u2c6e9ef.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sharehappyness",
+            "certificate_hash": "d2ad1113a38c9fd9956489bb3210e3fa12855aac"
+          }
+        },
+        {
+          "client_id": "605323385202-b5q05o5pg67tu8gtr8lsct5p267bv2df.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDR0TaVe5KXiAqaLp4s9Mhkz1RndoGN34g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "605323385202-b5q05o5pg67tu8gtr8lsct5p267bv2df.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

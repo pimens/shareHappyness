@@ -1,21 +1,19 @@
 import React from 'react';
-import { Image, StyleSheet, Button,AsyncStorage, View, Text, StatusBar } from 'react-native';
+import { Image, StyleSheet, Button, AsyncStorage, View, Text, StatusBar } from 'react-native';
 import { createAppContainer, createDrawerNavigator, createStackNavigator, DrawerItems } from 'react-navigation'; // Version can be specified in package.json
 import { Icon, Container, Header, Content } from 'native-base';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SplashScreen from './pages/Splash';
+import newBarang from './pages/newBarang';
+import Foto from './pages/components/Foto';
+
+
 
 const CustomContent = (props) => {
   return (
     <Container>
-      {/* <StatusBar backgroundColor="black" barStyle="light-content" /> */}
-      <Header style={{ backgroundColor: 'white', height: 100 }}>
-        <StatusBar backgroundColor="black" barStyle="light-content" />
-        <View style={{ justifyContent: "center", alignItems: "center" }}>
-          <Image source={require('./assets/logo.png')} style={{ width: 150, height: 100 }} />
-        </View>
-      </Header>
+      <Foto/>
       <Content style={{ backgroundColor: '#1e272e' }}>
         <DrawerItems {...props} />
       </Content>
@@ -45,20 +43,29 @@ const MyDrawerNavigator = createDrawerNavigator({
       )
     }
   },
+  addBarang: {
+    screen: newBarang,
+    navigationOptions: {
+      drawerLabel: 'Posting Barang',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+      )
+    }
+  },
   Login: {
     screen: Login,
     navigationOptions: {
       header: null,
-      drawerLabel: () => null,    
-      drawerLockMode: 'locked-close' 
+      drawerLabel: () => null,
+      drawerLockMode: 'locked-close'
     }
   },
   Splash: {
     screen: SplashScreen,
     navigationOptions: {
       header: null,
-      drawerLabel: () => null,    
-      drawerLockMode: 'locked-close' 
+      drawerLabel: () => null,
+      drawerLockMode: 'locked-close'
     }
   },
 }, {
@@ -91,8 +98,8 @@ export default class Happy extends React.Component {
       view: <AppContainer />
 
     };
-  }  
-  componentWillMount() {
+  }
+  componentWillMount() {    
     // setTimeout(() => {
     //   //IF FALSE NAVIGATE TO ERROR
     //   if (true) {
@@ -104,13 +111,8 @@ export default class Happy extends React.Component {
   }
   render() {
     return (
-      this.state.view
-        // <AppContainer />
+      this.state.view    
     )
   }
-
-  // render() {
-  //   return <AppContainer />;
-  // }
 }
 

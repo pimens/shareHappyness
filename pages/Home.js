@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { StatusBar,BackAndroid, Image, TouchableOpacity, Dimensions, Button, BackHandler, StyleSheet, Text, View } from 'react-native';
+import { BackHandler, StyleSheet, Text, View,Image } from 'react-native';
 import { Container, Content, Footer, Header, Icon } from 'native-base';
 import { connect } from 'react-redux'
+import Appbar from './components/Appbar';
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -9,8 +10,7 @@ class Home extends Component {
 
     };
   }
-  componentDidMount() {
-    console.warn(this.props.navigation.state.routeName);
+  componentDidMount() {    
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
   } 
   handleBackPress = () => {    
@@ -20,28 +20,10 @@ class Home extends Component {
     return (
       <Container>
         <View style={{ backgroundColor: "black", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
-          <View style={{
-            flexDirection: "row", justifyContent: "space-between", alignItems: "center",
-            backgroundColor: "#1e272e", width: "100%", borderBottomWidth: 2, borderBottomColor: "#1e272e"
-          }}>
-
-            <View style={{
-              justifyContent: "center", alignItems: "center",
-              flexDirection: "row", marginLeft: 15,
-            }}>
-              <Icon onPress={() => this.props.navigation.openDrawer()} name="md-menu" style={{ fontSize: 35, color: "#ffa502" }} />
-              <Text style={{ marginLeft: 10, fontSize: 25, color: "#ffa502" }}>
-                {this.props.userData.nama}
-              </Text>
-            </View>
-            <Icon name="logo-freebsd-devil" style={{ marginRight: 15, fontSize: 25, color: "#ffa502" }} />
-
-          </View>
+          <Appbar navigation={this.props.navigation}/>
           <Content>
-            {
-
-            }
-
+          <Image source={{ uri: 'http://192.168.1.6/apireact/data/foto/'+this.props.userData.foto}}
+            style={{ width: 80, height: 80, borderRadius:50 }} />
           </Content>
         </View>
       </Container>

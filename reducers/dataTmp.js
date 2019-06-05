@@ -1,7 +1,8 @@
 const initialState = {
     count: 50,
     userData: {
-        nama:'n'
+        nama:'n',
+        foto :'default.jpg'
     },
     da: [],
     editStaf: false

@@ -31,20 +31,21 @@ class Splash extends React.Component {
     refreshData = () => {
         this.state.db.transaction(tx => {
           tx.executeSql("SELECT * FROM session where status=1", [], (tx, results) => {
-              console.warn('data sotrage',results.rows.item(0))
-            if (results.rows.length === 1) {       //kalau ada data login dihape       
+              // console.warn('data sotrage',results.rows.length)
+            if (results.rows.length !=0) {       //kalau ada data login dihape       
               const fd = new FormData();
               fd.append('email', results.rows.item(0).email);
-              Axios.post("http://192.168.1.6/apireact/index.php/tps/login", fd)
+              fd.append('password', results.rows.item(0).email);
+              Axios.post("http://192.168.1.6/apireact/index.php/tps/login2", fd)
                 .then((response) => {              
                   if(response.data==="gagal"){                //ada data log dihp tapi di api tdk ada maka dihapus   
-                    console.warn("gagal")
+                    console.warn("gagal cari data log 2")
                     this.state.db.transaction(tx => {
                         tx.executeSql("delete FROM session where status=1", [], (tx, res) => {
                             console.log("berhasil hapus", results.rows.item(0))
                         });
                       });                
-                      this.red();
+                      // this.red();
                   }
                   else{//ada data login dan ada data di web
                     this.props.setDataUser(response.data);    

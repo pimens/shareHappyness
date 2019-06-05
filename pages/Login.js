@@ -3,6 +3,7 @@ import { View, Text, AsyncStorage, StyleSheet, TouchableOpacity, TextInput, Imag
 import { openDatabase } from 'react-native-sqlite-storage';
 import { connect } from 'react-redux'
 import Axios from 'axios';
+//login jgn masukin drawer nnti passsing props aja ke logins
 class Login extends Component {
   static navigationOptions = {
     drawerLockMode: 'locked-close'
@@ -20,7 +21,8 @@ class Login extends Component {
       curentPengeluaran: [],
       filePath: {},
       currentUser: {},
-      email: '' //enggap saja ketika dia tap button email ke ambil dari google play
+      email: '', //enggap saja ketika dia tap button email ke ambil dari google play
+      password: ''
     };
   }
   refreshData = () => {
@@ -32,6 +34,7 @@ class Login extends Component {
           });
           const fd = new FormData();
           fd.append('email', results.rows.item(0).email);
+          fd.append('password', this.state.password);
           Axios.post("http://192.168.1.6/apireact/index.php/tps/login", fd)
             .then((response) => {              
               this.props.setDataUser(response.data);           
@@ -51,7 +54,8 @@ class Login extends Component {
     });
     const fd = new FormData();
     fd.append('email', this.state.email);
-    Axios.post("http://192.168.1.6/apireact/index.php/tps/addUser", fd)
+    fd.append('password', this.state.password);
+    Axios.post("http://192.168.1.6/apireact/index.php/tps/login", fd)
       .then((response) => {
         console.warn("berhasil login");
       });
@@ -64,6 +68,11 @@ class Login extends Component {
             placeholder="Biaya"
             value={this.state.biaya}
             onChangeText={(text) => this.setState({ email: text })}
+          />
+          <TextInput
+            placeholder="Paass"
+            value={this.state.biaya}
+            onChangeText={(text) => this.setState({ password: text })}
           />
           <TouchableOpacity
             style={{ backgroundColor: "red" }}

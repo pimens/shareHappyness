@@ -3,6 +3,7 @@ package com.sharehappyness;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import fr.snapp.imagebase64.RNImgToBase64Package;
 import co.apptailor.googlesignin.RNGoogleSigninPackage;
 import com.imagepicker.ImagePickerPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new SQLitePluginPackage(), 
           new MainReactPackage(),
+            new RNImgToBase64Package(),
             new RNGoogleSigninPackage(),
             new ImagePickerPackage(),
           new RNGestureHandlerPackage()

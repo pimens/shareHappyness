@@ -3,6 +3,7 @@ import { View, Text, AsyncStorage, StyleSheet, TouchableOpacity, TextInput, Imag
 import { openDatabase } from 'react-native-sqlite-storage';
 import { connect } from 'react-redux'
 import Axios from 'axios';
+
 //login jgn masukin drawer nnti passsing props aja ke logins
 class Login extends Component {
   static navigationOptions = {
@@ -25,39 +26,39 @@ class Login extends Component {
       password: ''
     };
   }
-  refreshData = () => {
+  componentDidMount() {
+
     this.state.db.transaction(tx => {
-      tx.executeSql("SELECT * FROM session where status=1", [], (tx, results) => {
-        if (results.rows.length === 1) {
-          this.setState({
-            currentUser: results.rows.item(0),
-          });
-          const fd = new FormData();
-          fd.append('email', results.rows.item(0).email);
-          fd.append('password', this.state.password);
-          Axios.post("http://192.168.1.6/apireact/index.php/tps/login", fd)
-            .then((response) => {              
-              this.props.setDataUser(response.data);           
-            }).then(()=>this.props.navigation.navigate('Home'));
-        }       
+      tx.executeSql("SELECT * FROM session", [], (tx, results) => {
+        console.warn(results.rows.item(0))
       });
     });
+
+  }
+  redHome = () => {
+    this.props.navigation.navigate('Home');
   }
   loginPage = () => {
-    this.state.db.transaction(tx => {
-      tx.executeSql("insert into session (email,status)" +
-        "values ('" + this.state.email + "','1')",
-        [],
-        (tx, results) => {
-          this.refreshData();
-        });
-    });
     const fd = new FormData();
     fd.append('email', this.state.email);
     fd.append('password', this.state.password);
     Axios.post("http://192.168.1.6/apireact/index.php/tps/login", fd)
       .then((response) => {
-        console.warn("berhasil login");
+        if (response.data != 'gagal') {
+          this.state.db.transaction(tx => {
+            tx.executeSql("insert into session (email,status)" +
+              "values ('" + this.state.email + "','1')",
+              [],
+              (tx, results) => {
+                console.warn("berhasi");
+                this.props.setDataUser(response.data);
+                this.redHome();
+              });
+          });
+        }
+        else {
+          console.warn('gagal');
+        }
       });
   }
   render() {
@@ -78,7 +79,7 @@ class Login extends Component {
             style={{ backgroundColor: "red" }}
             onPress={this.loginPage}>
             <Text style={{ color: "white" }}>Login {this.props.userData.nama}</Text>
-          </TouchableOpacity>         
+          </TouchableOpacity>
         </View>
       </View>
     );

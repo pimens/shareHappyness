@@ -50,8 +50,7 @@ class Splash extends React.Component {
                   else{//ada data login dan ada data di web
                     this.props.setDataUser(response.data);    
                     this.redHome();
-                  }
-                
+                  }                
                 });
             }    //blm ada data login dihp  
             else{

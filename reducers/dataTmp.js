@@ -1,9 +1,11 @@
 const initialState = {
     count: 50,
     userData: {
-        nama:'n',
-        foto :'default.jpg'
+        nama: 'n',
+        foto: 'default.jpg'
     },
+    barangEdit:'',
+    server:'http://192.168.1.6/apireact/',
     da: [],
     editStaf: false
 }
@@ -16,6 +18,10 @@ const dataTmp = (state = initialState, action) => {
         case 'REMOVE_FROM_CART':
             return Object.assign({}, state, {
                 count: state.count + 1
+            })
+        case 'EDIT_BARANG':
+            return Object.assign({}, state, {
+                barangEdit: action.data
             })
         // return state.filter(cartItem => cartItem.id !== action.payload.id)
     }

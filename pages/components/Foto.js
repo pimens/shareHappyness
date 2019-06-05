@@ -1,18 +1,47 @@
 import React from 'react';
-import { Image, View,StatusBar,Text } from 'react-native'
+import { Image, View, StatusBar, Text,TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Icon, Container, Header, Content } from 'native-base';
+import { openDatabase } from 'react-native-sqlite-storage';
 
-class Foto extends React.Component { 
+class Foto extends React.Component {
+  constructor(props) {
+    super(props);
+    const db = openDatabase({
+      name: 'catat.db',
+      location: 'default',
+      createFromLocation: '~www/catat.db',
+
+    });
+    this.state = {
+      db: db,
+      email: '' //enggap saja ketika dia tap button email ke ambil dari google play
+    };
+  }
+  go =()=>{
+    this.props.navigation.navigate('Home')
+  }
+  logout = () => {
+    this.state.db.transaction(tx => {
+      tx.executeSql("delete FROM session where status=1", [], (tx, res) => {
+        console.log("berhasil hapus", results.rows.item(0))
+        this.go();
+      });
+    });
+  }
   render() {
     return (
       <View>
         <Header style={{ backgroundColor: 'white', height: 150, }}>
           <StatusBar backgroundColor="black" barStyle="light-content" />
-          <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>           
+          <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
             <Image source={{ uri: 'http://192.168.1.6/apireact/data/foto/' + this.props.userData.foto }}
               style={{ width: 80, height: 80, borderRadius: 50 }} />
-            <Text></Text>
+            <TouchableOpacity
+              style={{ backgroundColor: "red" }}
+              onPress={this.logout}>
+              <Text style={{ color: "white" }}>Logout</Text>
+            </TouchableOpacity>
           </View>
         </Header>
       </View>

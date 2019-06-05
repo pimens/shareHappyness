@@ -7,9 +7,8 @@ import Login from './pages/Login';
 import SplashScreen from './pages/Splash';
 import newBarang from './pages/newBarang';
 import Foto from './pages/components/Foto';
-
-
-
+import Barangku from './pages/Barangku';
+import EditBarang from './pages/EditBarang';
 const CustomContent = (props) => {
   return (
     <Container>
@@ -52,6 +51,15 @@ const MyDrawerNavigator = createDrawerNavigator({
       )
     }
   },
+  Barangku: {
+    screen: Barangku,
+    navigationOptions: {
+      drawerLabel: 'My Barang',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+      )
+    }
+  },
   Login: {
     screen: Login,
     navigationOptions: {
@@ -62,6 +70,14 @@ const MyDrawerNavigator = createDrawerNavigator({
   },
   Splash: {
     screen: SplashScreen,
+    navigationOptions: {
+      header: null,
+      drawerLabel: () => null,
+      drawerLockMode: 'locked-close'
+    }
+  },
+  EditBarang: {
+    screen: EditBarang,
     navigationOptions: {
       header: null,
       drawerLabel: () => null,

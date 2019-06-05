@@ -4,7 +4,6 @@ import Appbar from './components/Appbar';
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
 import Axios from 'axios';
-import ImgToBase64 from 'react-native-image-base64';
 import { ScrollView } from 'react-native-gesture-handler';
 class newBarang extends Component {
     constructor(props) {
@@ -30,9 +29,10 @@ class newBarang extends Component {
         fd.append('deskripsi', this.state.deskripsi);
         fd.append('kategori', this.state.kategori);
         fd.append('user', this.props.userData.id);
-        Axios.post('http://192.168.1.6/apireact/index.php/tps/tesAdd', fd).then((response) => {
+        Axios.post(this.props.server+'index.php/tps/tesAdd', fd).then((response) => {
             console.warn(response.data)
         })
+        this.props.navigation.navigate('Home')
     }
     delete = (ind) => {
         var array = [...this.state.img]; // make a separate copy of the array
@@ -139,14 +139,14 @@ class newBarang extends Component {
                         <Text style={{ color: "black" }}>Save Data </Text>
                     </TouchableOpacity>
                 </View>
-
             </View>
         );
     }
 }
 const mapStateToProps = (state) => {
     return {
-        userData: state.userData
+        userData: state.userData,
+        server : state.server
     }
 }
 const mapDispatchToProps = (dispatch) => {

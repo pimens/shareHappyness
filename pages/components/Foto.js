@@ -50,7 +50,8 @@ class Foto extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    userData: state.userData
+    userData: state.userData,
+    server : state.server
   }
 }
 const mapDispatchToProps = (dispatch) => {

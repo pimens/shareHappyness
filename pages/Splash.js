@@ -74,7 +74,8 @@ class Splash extends React.Component {
 const mapStateToProps = (state) => {
     return {
       count: state.count,
-      userData: state.userData
+      userData: state.userData,
+      server:state.server
     }
   }
   const mapDispatchToProps = (dispatch) => {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-class Home extends Component {
+class BarangApply extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -14,21 +14,16 @@ class Home extends Component {
     };
   }
   componentDidMount() {
-    // BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     this.refresh();
   }
   handleBackPress = () => {
-    // BackHandler.exitApp()
+    BackHandler.exitApp()
   }
   refresh = () => {
-    Axios.get(this.props.server + 'index.php/home/getDataHome/'+this.props.userData.id).then((response) => {
+    Axios.get(this.props.server + 'index.php/home/getDataApply/'+this.props.userData.id).then((response) => {
       this.setState({data: response.data})
     })
-  }
-  detail=(id)=>{
-    console.warn(id);
-    this.props.setBarangDetail(id);
-    this.props.navigation.navigate('DetailBarang');
   }
   render() {
     return (
@@ -40,7 +35,6 @@ class Home extends Component {
               this.state.data.map((data,i)=>{
                 return(
                   <TouchableOpacity 
-                  onPress={()=>this.detail(data.id)}
                   style={{backgroundColor:"red"}}>
                       <Text>{data.nama}</Text>
                       <Text>{data.j}</Text>
@@ -65,9 +59,9 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    setBarangDetail: (barangDetail) => dispatch({ type: 'DETAIL_BARANG', data: barangDetail })
+    addData: (product) => dispatch({ type: 'ADD_TO_CART', payload: product })
   }
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(BarangApply);

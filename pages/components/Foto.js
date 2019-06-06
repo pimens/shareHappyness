@@ -35,7 +35,7 @@ class Foto extends React.Component {
         <Header style={{ backgroundColor: 'white', height: 150, }}>
           <StatusBar backgroundColor="black" barStyle="light-content" />
           <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
-            <Image source={{ uri: 'http://192.168.1.6/apireact/data/foto/' + this.props.userData.foto }}
+            <Image source={{ uri: 'http://192.168.1.4/apireact/data/foto/' + this.props.userData.foto }}
               style={{ width: 80, height: 80, borderRadius: 50 }} />
             <TouchableOpacity
               style={{ backgroundColor: "red" }}

@@ -37,6 +37,7 @@ class EditBarang extends Component {
         })
         this.props.navigation.navigate('Barangku');
     }
+    
     chooseFile = (jenis,datake) => {
         // console.warn(jenis,datake)        
         var options = {
@@ -61,8 +62,7 @@ class EditBarang extends Component {
                 alert(response.customButton);
             } else {
                 let source = response.data;                           
-                this.saveImage(jenis,datake,source)
-                      
+                this.saveImage(jenis,datake,source)                      
             }
         })
     };

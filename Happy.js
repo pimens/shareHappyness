@@ -9,10 +9,12 @@ import newBarang from './pages/newBarang';
 import Foto from './pages/components/Foto';
 import Barangku from './pages/Barangku';
 import EditBarang from './pages/EditBarang';
+import BarangApply from './pages/BarangApply';
+import DetailBarang from './pages/Barang/DetailBarang';
 const CustomContent = (props) => {
   return (
     <Container>
-      <Foto/>
+      <Foto />
       <Content style={{ backgroundColor: '#1e272e' }}>
         <DrawerItems {...props} />
       </Content>
@@ -32,6 +34,7 @@ const styles = StyleSheet.create({
     color: 'black'
   }
 });
+
 const MyDrawerNavigator = createDrawerNavigator({
   Home: {
     screen: Home,
@@ -55,6 +58,15 @@ const MyDrawerNavigator = createDrawerNavigator({
     screen: Barangku,
     navigationOptions: {
       drawerLabel: 'My Barang',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+      )
+    }
+  },
+  BarangApply: {
+    screen: BarangApply,
+    navigationOptions: {
+      drawerLabel: 'Daftar Keinginan',
       drawerIcon: ({ tintColor }) => (
         <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
       )
@@ -84,6 +96,14 @@ const MyDrawerNavigator = createDrawerNavigator({
       drawerLockMode: 'locked-close'
     }
   },
+  DetailBarang: {
+    screen: DetailBarang,
+    navigationOptions: {
+      header: null,
+      drawerLabel: () => null,
+      drawerLockMode: 'locked-close'
+    }
+  },
 }, {
     initialRouteName: 'Splash',
     drawerPosition: 'left',
@@ -104,7 +124,6 @@ const MyDrawerNavigator = createDrawerNavigator({
 );
 
 
-
 const AppContainer = createAppContainer(MyDrawerNavigator);
 export default class Happy extends React.Component {
   constructor(props) {
@@ -115,7 +134,7 @@ export default class Happy extends React.Component {
 
     };
   }
-  componentWillMount() {    
+  componentWillMount() {
     // setTimeout(() => {
     //   //IF FALSE NAVIGATE TO ERROR
     //   if (true) {
@@ -127,7 +146,7 @@ export default class Happy extends React.Component {
   }
   render() {
     return (
-      this.state.view    
+      this.state.view
     )
   }
 }

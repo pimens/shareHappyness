@@ -109,7 +109,7 @@ class Login extends Component {
     const fd = new FormData();
     fd.append('email', this.state.email);
     fd.append('password', this.state.password);
-    Axios.post("http://192.168.1.6/apireact/index.php/tps/login", fd)
+    Axios.post("http://192.168.1.4/apireact/index.php/tps/login", fd)
       .then((response) => {
         if (response.data != 'gagal') {
           this.state.db.transaction(tx => {

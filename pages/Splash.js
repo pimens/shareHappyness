@@ -36,7 +36,7 @@ class Splash extends React.Component {
               const fd = new FormData();
               fd.append('email', results.rows.item(0).email);
               fd.append('password', results.rows.item(0).email);
-              Axios.post("http://192.168.1.6/apireact/index.php/tps/login2", fd)
+              Axios.post("http://192.168.1.4/apireact/index.php/tps/login2", fd)
                 .then((response) => {              
                   if(response.data==="gagal"){                //ada data log dihp tapi di api tdk ada maka dihapus   
                     console.warn("gagal cari data log 2")
@@ -45,7 +45,7 @@ class Splash extends React.Component {
                             console.log("berhasil hapus", results.rows.item(0))
                         });
                       });                
-                      // this.red();
+                      this.red();
                   }
                   else{//ada data login dan ada data di web
                     this.props.setDataUser(response.data);    

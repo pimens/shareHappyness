@@ -12,6 +12,7 @@ import EditBarang from './pages/EditBarang';
 import BarangApply from './pages/BarangApply';
 import DetailBarang from './pages/Barang/DetailBarang';
 import Splash from './pages/Splash';
+import Peminat from './pages/Peminat';
 const CustomContent = (props) => {
   return (
     <Container>
@@ -118,6 +119,14 @@ const DrawerHome = createDrawerNavigator({
   // },
   EditBarang: {
     screen: EditBarang,
+    navigationOptions: {
+      header: null,
+      drawerLabel: () => null,
+      drawerLockMode: 'locked-close'
+    }
+  },
+  Peminat: {
+    screen: Peminat,
     navigationOptions: {
       header: null,
       drawerLabel: () => null,

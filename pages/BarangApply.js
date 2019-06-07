@@ -23,6 +23,7 @@ class BarangApply extends Component {
   refresh = () => {
     Axios.get(this.props.server + 'index.php/home/getDataApply/'+this.props.userData.id).then((response) => {
       this.setState({data: response.data})
+      console.warn(response.data)
     })
   }
   render() {
@@ -38,6 +39,9 @@ class BarangApply extends Component {
                   style={{backgroundColor:"red"}}>
                       <Text>{data.nama}</Text>
                       <Text>{data.j}</Text>
+                      {
+                        data.hasil === 'y' ? <Text>Berhasil</Text> : <Text>Sabar</Text>
+                      }
                   </TouchableOpacity>
                 )
               })

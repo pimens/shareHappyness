@@ -8,7 +8,8 @@ const initialState = {
     barangDetail: '',
     server: 'http://192.168.1.4/apireact/',
     da: [],
-    editStaf: false
+    editStaf: false,
+    notif: 0
 }
 const dataTmp = (state = initialState, action) => {
     switch (action.type) {
@@ -27,6 +28,10 @@ const dataTmp = (state = initialState, action) => {
         case 'DETAIL_BARANG':
             return Object.assign({}, state, {
                 barangDetail: action.data
+            })
+        case 'NOTIF':
+            return Object.assign({}, state, {
+                notif: action.data
             })
         // return state.filter(cartItem => cartItem.id !== action.payload.id)
     }

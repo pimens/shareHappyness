@@ -30,6 +30,10 @@ class Barangku extends Component {
        this.props.setDataEdit(id);
        this.props.navigation.navigate('EditBarang');
     }
+    peminat = (id) => {
+        this.props.setDataEdit(id);
+        this.props.navigation.navigate('Peminat');
+     }
     render() {
         return (
             <View>
@@ -48,6 +52,11 @@ class Barangku extends Component {
                                     style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                                     onPress={() => this.edit(data.id)}>
                                     <Text style={{ color: "white" }}>Edit</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+                                    onPress={() => this.peminat(data.id)}>
+                                    <Text style={{ color: "white" }}>Peminat</Text>
                                 </TouchableOpacity>
                             </View>
                         )

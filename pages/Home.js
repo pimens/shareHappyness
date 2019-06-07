@@ -9,7 +9,8 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: []
+      data: [],
+      notif:[],
 
     };
   }
@@ -23,7 +24,12 @@ class Home extends Component {
   refresh = () => {
     Axios.get(this.props.server + 'index.php/home/getDataHome/' + this.props.userData.id).then((response) => {
       this.setState({ data: response.data })
-    })
+    });
+    Axios.get(this.props.server + 'index.php/home/getNotifikasi/' + this.props.userData.id).then((response) => {
+      this.setState({ notif: response.data })
+      this.props.setNotif(response.data[0].j)
+      console.warn(response.data[0].j)
+    });
   }
   detail = (id) => {
     console.warn(id);
@@ -59,18 +65,17 @@ class Home extends Component {
     );
   }
 }
-
-
-
 const mapStateToProps = (state) => {
   return {
     server: state.server,
-    userData: state.userData
+    userData: state.userData,    
   }
 }
 const mapDispatchToProps = (dispatch) => {
   return {
-    setBarangDetail: (barangDetail) => dispatch({ type: 'DETAIL_BARANG', data: barangDetail })
+    setBarangDetail: (barangDetail) => dispatch({ type: 'DETAIL_BARANG', data: barangDetail }),
+    setNotif: (notif) => dispatch({ type: 'NOTIF', data: notif })
+
   }
 }
 

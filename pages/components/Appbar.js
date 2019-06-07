@@ -23,7 +23,7 @@ class Appbar extends Component {
         }}>
           <Icon onPress={() => this.props.navigation.openDrawer()} name="md-menu" style={{ fontSize: 35, color: "#ffa502" }} />
           <Text style={{ marginLeft: 10, fontSize: 25, color: "#ffa502" }}>
-            {this.props.userData.nama}
+            {this.props.userData.nama}{this.props.notif}
           </Text>
         </View>
         <Icon name="logo-freebsd-devil" style={{ marginRight: 15, fontSize: 25, color: "#ffa502" }} />
@@ -37,7 +37,8 @@ class Appbar extends Component {
 const mapStateToProps = (state) => {
   return {
     count: state.count,
-    userData: state.userData
+    userData: state.userData,
+    notif:state.notif
   }
 }
 const mapDispatchToProps = (dispatch) => {

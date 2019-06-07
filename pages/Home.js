@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BackHandler, StyleSheet, Text, View, Image } from 'react-native';
-import { Container, Content, Footer, Header, Icon } from 'native-base';
+import { Container, Content, Card,  Thumbnail, Button, Icon, Tab, Tabs } from 'native-base';
+
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
@@ -10,7 +11,7 @@ class Home extends Component {
     super(props);
     this.state = {
       data: [],
-      notif:[],
+      notif: [],
 
     };
   }
@@ -28,7 +29,7 @@ class Home extends Component {
     Axios.get(this.props.server + 'index.php/home/getNotifikasi/' + this.props.userData.id).then((response) => {
       this.setState({ notif: response.data })
       this.props.setNotif(response.data[0].j)
-      console.warn(response.data[0].j)
+      // console.warn(response.data[0].j)
     });
   }
   detail = (id) => {
@@ -39,26 +40,43 @@ class Home extends Component {
   render() {
     return (
       <Container>
-        <View style={{ backgroundColor: "black", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
+        <View style={{ backgroundColor: "#bdc3c7", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
           <Appbar navigation={this.props.navigation} />
           <Content>
-            {
-              this.state.data.map((data, i) => {
-                return (
-                  <TouchableOpacity
-                    onPress={() => this.detail(data.id)}
-                    style={{ backgroundColor: "red" }}>
-                    <Text>{data.nama}</Text>
-                    <Text>{data.j}</Text>
-                  </TouchableOpacity>
-                )
-              })
-            }
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Login')}
-              style={{ backgroundColor: "red" }}>
-              <Text>xxxxxxx</Text>
-            </TouchableOpacity>
+            <View style={{ margin: 5 }}>
+              {
+                this.state.data.map((data, i) => {
+                  return (
+                    <Card key={i}>
+                      <View style={{ flexDirection: "row", padding: 5 }}>
+                        <Thumbnail source={{ uri: this.props.server + data.image1 }} />
+                        <View style={{
+                          alignItems: "center", margin: 5, flexDirection: "row", flex: 1,
+                          justifyContent: "space-between"
+                        }}>
+                          <View>
+                            <Text>{data.nama}</Text>
+                            <View style={{flexDirection:"row"}}>
+                              <Icon name="attach" style={{ fontSize: 15,marginRight: 4,}} />
+                              <Text>{data.j}</Text>
+                              <Icon name="calendar" style={{ fontSize: 15,marginRight: 4,marginLeft: 10,}} />
+                              <Text>{data.tanggal}</Text>
+                              <Icon name="pin" style={{ fontSize: 15,marginRight: 4,marginLeft: 10,}} />
+                              <Text>{data.lokasi}</Text>
+                            </View>
+                          </View>
+                          <TouchableOpacity
+                            onPress={() => this.detail(data.id)}
+                            style={{ margin: 15 }}>
+                            <Icon name="more" />
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </Card>
+                  )
+                })
+              }
+            </View>
           </Content>
         </View>
       </Container>
@@ -68,7 +86,7 @@ class Home extends Component {
 const mapStateToProps = (state) => {
   return {
     server: state.server,
-    userData: state.userData,    
+    userData: state.userData,
   }
 }
 const mapDispatchToProps = (dispatch) => {

@@ -13,6 +13,8 @@ import BarangApply from './pages/BarangApply';
 import DetailBarang from './pages/Barang/DetailBarang';
 import Splash from './pages/Splash';
 import Peminat from './pages/Peminat';
+import FormApply from './pages/Barang/FormApply';
+// import Tabs from './pages/Tab'
 const CustomContent = (props) => {
   return (
     <Container>
@@ -23,50 +25,42 @@ const CustomContent = (props) => {
     </Container>
   )
 }
-const styles = StyleSheet.create({
-  button: {
-    flexDirection: 'row',
-    width: '100%',
-    alignItems: 'center',
-    height: '100%',
-  },
 
-  buttonText: {
-    padding: 20,
-    color: 'black'
+const Brgku = createStackNavigator(
+  {
+    DaftarBarang: {
+      screen: Barangku,
+    },
+    Peminat: {
+      screen: Peminat,
+    },
+    EditBarang: {
+      screen: EditBarang,
+    },
+  },
+  {
+    headerMode: 'none',
   }
-});
-const DrawerLogin = createDrawerNavigator({
-  Login: {
-    screen: Login,
-    navigationOptions: {
-      drawerLabel: 'Login',
-      drawerIcon: ({ tintColor }) => (
-        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
-      )
-    }
+);
+const homeStack = createStackNavigator(
+  {
+    Home: {
+      screen: Home,
+    },
+    DetailBarang: {
+      screen: DetailBarang,
+    },
+    FormApply: {
+      screen: FormApply,
+    },
   },
-}, {
-    initialRouteName: 'Login',
-    drawerPosition: 'left',
-    contentComponent: CustomContent,
-    unmountInactiveRoutes: true,
-    drawerOpenRoute: 'DrawerOpen',
-    drawerCloseRoute: 'DrawerClose',
-    drawerToggleRoute: 'DrawerToggle',
-    contentOptions: {
-      inactiveTintColor: "white",
-      activeBackgroundColor: "black",
-      activeTintColor: '#FF9800',
-      labelStyle: {
-        color: "white"
-      }
-    }
-  },
+  {
+    headerMode: 'none',
+  }
 );
 const DrawerHome = createDrawerNavigator({
   Home: {
-    screen: Home,
+    screen: homeStack,
     navigationOptions: {
       drawerLabel: 'Beranda',
       drawerIcon: ({ tintColor }) => (
@@ -83,8 +77,9 @@ const DrawerHome = createDrawerNavigator({
       )
     }
   },
+  // Barangku: Brgku,
   Barangku: {
-    screen: Barangku,
+    screen: Brgku,
     navigationOptions: {
       drawerLabel: 'My Barang',
       drawerIcon: ({ tintColor }) => (
@@ -109,38 +104,30 @@ const DrawerHome = createDrawerNavigator({
       drawerLockMode: 'locked-close'
     }
   },
-  // Splash: {
-  //   screen: SplashScreen,
+  // EditBarang: {
+  //   screen: EditBarang,
   //   navigationOptions: {
   //     header: null,
   //     drawerLabel: () => null,
   //     drawerLockMode: 'locked-close'
   //   }
   // },
-  EditBarang: {
-    screen: EditBarang,
-    navigationOptions: {
-      header: null,
-      drawerLabel: () => null,
-      drawerLockMode: 'locked-close'
-    }
-  },
-  Peminat: {
-    screen: Peminat,
-    navigationOptions: {
-      header: null,
-      drawerLabel: () => null,
-      drawerLockMode: 'locked-close'
-    }
-  },
-  DetailBarang: {
-    screen: DetailBarang,
-    navigationOptions: {
-      header: null,
-      drawerLabel: () => null,
-      drawerLockMode: 'locked-close'
-    }
-  },
+  // Peminat: {
+  //   screen: Peminat,
+  //   navigationOptions: {
+  //     header: null,
+  //     drawerLabel: () => null,
+  //     drawerLockMode: 'locked-close'
+  //   }
+  // },
+  // DetailBarang: {
+  //   screen: DetailBarang,
+  //   navigationOptions: {
+  //     header: null,
+  //     drawerLabel: () => null,
+  //     drawerLockMode: 'locked-close'
+  //   }
+  // },
 }, {
     initialRouteName: 'Home',
     drawerPosition: 'left',
@@ -159,7 +146,7 @@ const DrawerHome = createDrawerNavigator({
     }
   },
 );
-const AppStack = createStackNavigator({ Login: Login,Foto:Foto},{headerMode:'none'});
+const AppStack = createStackNavigator({ Login: Login, Foto: Foto }, { headerMode: 'none' });
 const Check = createSwitchNavigator(
   {
     Auth: Splash,

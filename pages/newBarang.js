@@ -38,7 +38,7 @@ class newBarang extends Component {
         var array = [...this.state.img]; // make a separate copy of the array
         if (ind !== -1) {
             array.splice(ind, 1);
-            this.setState({ img: array });
+            this.setState({ img: array, count:this.state.count-1 });
         }
     }
     chooseFile = () => {
@@ -67,7 +67,8 @@ class newBarang extends Component {
                 var tmp = [...this.state.img];
                 tmp.push(source);
                 this.setState({
-                    img: tmp
+                    img: tmp,
+                    count:this.state.count+1
                 })               
             }
         })

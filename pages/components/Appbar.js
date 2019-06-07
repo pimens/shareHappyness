@@ -14,7 +14,7 @@ class Appbar extends Component {
     return (
       <View style={{
         flexDirection: "row", justifyContent: "space-between", alignItems: "center",
-        backgroundColor: "#1e272e", width: "100%", borderBottomWidth: 2, borderBottomColor: "#1e272e"
+        backgroundColor: "#95a5a6", width: "100%", borderBottomWidth: 2, borderBottomColor: "#7f8c8d"
       }}>
 
         <View style={{

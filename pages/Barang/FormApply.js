@@ -5,7 +5,7 @@ import Axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
 
-class DetailBarang extends Component {
+class FormApply extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -15,7 +15,6 @@ class DetailBarang extends Component {
                 uri: 'http://192.168.1.4/apireact/data/foto/annisa.jpg'
             },
             app: false
-
         };
     }
     chooseFile = () => {
@@ -52,9 +51,6 @@ class DetailBarang extends Component {
         Axios.get(this.props.server + 'index.php/tps/getBarangById/' + this.props.barangDetail)
             .then((response) => { this.setState({ data: response.data[0] }) })
     }
-    app = () => {
-        this.props.navigation.navigate('FormApply')
-    }
     save = () => {
         const fd = new FormData();
         fd.append('idbarang', this.props.barangDetail);
@@ -72,15 +68,26 @@ class DetailBarang extends Component {
             <View>
 
                 <View>
-                    <Text>{this.state.data.nama}</Text>
+                    <TextInput
+                        placeholder="Deskripsi Barang"
+                        value={this.state.alasan}
+                        multiline={true}
+                        numberOfLines={4}
+                        style={{ height: 75, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+                        onChangeText={(text) => this.setState({ alasan: text })} />
+                    <Image source={{ uri: this.state.foto.uri }}
+                        style={{ width: 80, height: 80, borderRadius: 50 }} />
                     <TouchableOpacity
-                        onPress={() => this.app()}
+                        onPress={() => this.chooseFile()}
                         style={{ backgroundColor: "red" }}>
-                        <Text>Apply</Text>
+                        <Text>Foto Pendukung</Text>
                     </TouchableOpacity>
-                    <Text> DetailBarang </Text>
+                    <TouchableOpacity
+                        onPress={() => this.save()}
+                        style={{ backgroundColor: "red" }}>
+                        <Text>Save</Text>
+                    </TouchableOpacity>
                 </View>
-
             </View>
         );
     }
@@ -100,5 +107,5 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DetailBarang);
+export default connect(mapStateToProps, mapDispatchToProps)(FormApply);
 

@@ -3,7 +3,7 @@ import { Image, View, StatusBar, Text,TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Icon, Container, Header, Content } from 'native-base';
 import { openDatabase } from 'react-native-sqlite-storage';
-
+import { withNavigation } from 'react-navigation';
 class Foto extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +19,7 @@ class Foto extends React.Component {
     };
   }
   go =()=>{
-    this.props.navigation.navigate('Home')
+   
   }
   logout = () => {
     this.state.db.transaction(tx => {
@@ -28,6 +28,7 @@ class Foto extends React.Component {
         this.go();
       });
     });
+    this.props.navigation.navigate('Auth')
   }
   render() {
     return (
@@ -39,7 +40,7 @@ class Foto extends React.Component {
               style={{ width: 80, height: 80, borderRadius: 50 }} />
             <TouchableOpacity
               style={{ backgroundColor: "red" }}
-              onPress={this.logout}>
+              onPress={()=>this.logout()}>
               <Text style={{ color: "white" }}>Logout</Text>
             </TouchableOpacity>
           </View>
@@ -61,4 +62,4 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Foto);
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(Foto));

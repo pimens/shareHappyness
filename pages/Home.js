@@ -21,11 +21,11 @@ class Home extends Component {
     // BackHandler.exitApp()
   }
   refresh = () => {
-    Axios.get(this.props.server + 'index.php/home/getDataHome/'+this.props.userData.id).then((response) => {
-      this.setState({data: response.data})
+    Axios.get(this.props.server + 'index.php/home/getDataHome/' + this.props.userData.id).then((response) => {
+      this.setState({ data: response.data })
     })
   }
-  detail=(id)=>{
+  detail = (id) => {
     console.warn(id);
     this.props.setBarangDetail(id);
     this.props.navigation.navigate('DetailBarang');
@@ -37,17 +37,22 @@ class Home extends Component {
           <Appbar navigation={this.props.navigation} />
           <Content>
             {
-              this.state.data.map((data,i)=>{
-                return(
-                  <TouchableOpacity 
-                  onPress={()=>this.detail(data.id)}
-                  style={{backgroundColor:"red"}}>
-                      <Text>{data.nama}</Text>
-                      <Text>{data.j}</Text>
+              this.state.data.map((data, i) => {
+                return (
+                  <TouchableOpacity
+                    onPress={() => this.detail(data.id)}
+                    style={{ backgroundColor: "red" }}>
+                    <Text>{data.nama}</Text>
+                    <Text>{data.j}</Text>
                   </TouchableOpacity>
                 )
               })
             }
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('Login')}
+              style={{ backgroundColor: "red" }}>
+              <Text>xxxxxxx</Text>
+            </TouchableOpacity>
           </Content>
         </View>
       </Container>

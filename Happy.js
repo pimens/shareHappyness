@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet, Button, AsyncStorage, View, Text, StatusBar } from 'react-native';
-import { createAppContainer, createDrawerNavigator, createStackNavigator, DrawerItems } from 'react-navigation'; // Version can be specified in package.json
+import { createAppContainer, createDrawerNavigator, createStackNavigator, createSwitchNavigator, DrawerItems } from 'react-navigation'; // Version can be specified in package.json
 import { Icon, Container, Header, Content } from 'native-base';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -11,6 +11,7 @@ import Barangku from './pages/Barangku';
 import EditBarang from './pages/EditBarang';
 import BarangApply from './pages/BarangApply';
 import DetailBarang from './pages/Barang/DetailBarang';
+import Splash from './pages/Splash';
 const CustomContent = (props) => {
   return (
     <Container>
@@ -34,8 +35,35 @@ const styles = StyleSheet.create({
     color: 'black'
   }
 });
-
-const MyDrawerNavigator = createDrawerNavigator({
+const DrawerLogin = createDrawerNavigator({
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      drawerLabel: 'Login',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+      )
+    }
+  },
+}, {
+    initialRouteName: 'Login',
+    drawerPosition: 'left',
+    contentComponent: CustomContent,
+    unmountInactiveRoutes: true,
+    drawerOpenRoute: 'DrawerOpen',
+    drawerCloseRoute: 'DrawerClose',
+    drawerToggleRoute: 'DrawerToggle',
+    contentOptions: {
+      inactiveTintColor: "white",
+      activeBackgroundColor: "black",
+      activeTintColor: '#FF9800',
+      labelStyle: {
+        color: "white"
+      }
+    }
+  },
+);
+const DrawerHome = createDrawerNavigator({
   Home: {
     screen: Home,
     navigationOptions: {
@@ -80,14 +108,14 @@ const MyDrawerNavigator = createDrawerNavigator({
       drawerLockMode: 'locked-close'
     }
   },
-  Splash: {
-    screen: SplashScreen,
-    navigationOptions: {
-      header: null,
-      drawerLabel: () => null,
-      drawerLockMode: 'locked-close'
-    }
-  },
+  // Splash: {
+  //   screen: SplashScreen,
+  //   navigationOptions: {
+  //     header: null,
+  //     drawerLabel: () => null,
+  //     drawerLockMode: 'locked-close'
+  //   }
+  // },
   EditBarang: {
     screen: EditBarang,
     navigationOptions: {
@@ -105,7 +133,7 @@ const MyDrawerNavigator = createDrawerNavigator({
     }
   },
 }, {
-    initialRouteName: 'Splash',
+    initialRouteName: 'Home',
     drawerPosition: 'left',
     contentComponent: CustomContent,
     unmountInactiveRoutes: true,
@@ -122,9 +150,19 @@ const MyDrawerNavigator = createDrawerNavigator({
     }
   },
 );
+const AppStack = createStackNavigator({ Login: Login,Foto:Foto},{headerMode:'none'});
+const Check = createSwitchNavigator(
+  {
+    Auth: Splash,
+    Log: AppStack,
+    Beranda: DrawerHome
+  },
+  {
+    initialRouteName: 'Auth',
+  }
+);
 
-
-const AppContainer = createAppContainer(MyDrawerNavigator);
+const AppContainer = createAppContainer(Check);
 export default class Happy extends React.Component {
   constructor(props) {
     super(props);

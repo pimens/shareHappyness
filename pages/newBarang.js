@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image,Picker } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, Picker } from 'react-native';
 import Appbar from './components/Appbar';
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
@@ -78,7 +78,7 @@ class newBarang extends Component {
     render() {
         return (
             <Container>
-                <Appbar navigation={this.props.navigation} />
+                <Appbar navigation={this.props.navigation} tool={false} />
                 <Content>
                     <TextInput
                         placeholder="Nama Barang"
@@ -93,11 +93,11 @@ class newBarang extends Component {
                     <Picker
                         selectedValue={this.state.kategori}
                         style={{ borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
-                        onValueChange={(itemValue, itemIndex) => this.setState({kategori:itemValue})}>
+                        onValueChange={(itemValue, itemIndex) => this.setState({ kategori: itemValue })}>
                         <Picker.Item label="Kategori" value="" />
                         <Picker.Item label="Alat" value="1" />
                         <Picker.Item label="Mebel" value="2" />
-                    </Picker>                
+                    </Picker>
                     <TextInput
                         placeholder="Deskripsi Barang"
                         value={this.state.deskripsi}
@@ -118,9 +118,9 @@ class newBarang extends Component {
                                             source={{ uri: data.uri }}
                                             style={{ width: 100, height: 100 }} />
                                         <TouchableOpacity
-                                            style={{ justifyContent:"center",alignItems:'center' }}
+                                            style={{ justifyContent: "center", alignItems: 'center' }}
                                             onPress={() => this.delete(i)}>
-                                            <Icon name="trash" style={{ color: "#192a56" }}/>
+                                            <Icon name="trash" style={{ color: "#192a56" }} />
                                         </TouchableOpacity>
                                     </View>
 

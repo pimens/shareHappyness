@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { BackHandler, StyleSheet, Text, View, Image, Picker, RefreshControl } from 'react-native';
 import { Container, Content, Card, Thumbnail, Button, Icon, Item, Input } from 'native-base';
-
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
@@ -62,7 +61,7 @@ class Home extends Component {
     return (
       <Container>
         <View style={{ backgroundColor: "#bdc3c7", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
-          <Appbar navigation={this.props.navigation} />
+          <Appbar navigation={this.props.navigation} tool={true} />
           <Content
             refreshControl={
               <RefreshControl

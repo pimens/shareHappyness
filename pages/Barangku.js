@@ -38,24 +38,24 @@ class Barangku extends Component {
     render() {
         return (
             <Container>
-                <Appbar navigation={this.props.navigation} />
+                <Appbar navigation={this.props.navigation} tool={false} />
                 {
                     this.state.barang.map((data, i) => {
                         return (
                             <Card key={i}>
-                                <View style={{ flexDirection: "row", margin: 10 }}>                                    
+                                <View style={{ flexDirection: "row", margin: 10 }}>
                                     <Text style={{ color: "black", marginLeft: 5 }}>{data.nama}</Text>
                                 </View>
                                 <View style={{ flexDirection: "row", marginLeft: 10 }}>
                                     <Icon name='pin' style={{ fontSize: 15, }} />
                                     <Text style={{ color: "black", marginLeft: 5 }}>{data.lokasi}</Text>
                                 </View>
-                                <View style={{ marginRight:10,flexDirection: "row",justifyContent: "space-between" }}>
+                                <View style={{ marginRight: 10, flexDirection: "row", justifyContent: "space-between" }}>
                                     <TouchableOpacity
                                         style={{ alignItems: "center", justifyContent: "center" }}
                                         onPress={() => this.hapus(data.id)}>
-                                         <View style={{ flexDirection: "row", margin: 10 }}>
-                                            <Icon name='trash' style={{ fontSize: 15, color: "#192a56",marginRight: 5, }} />
+                                        <View style={{ flexDirection: "row", margin: 10 }}>
+                                            <Icon name='trash' style={{ fontSize: 15, color: "#192a56", marginRight: 5, }} />
                                             <Text>Delete</Text>
                                         </View>
                                     </TouchableOpacity>
@@ -63,15 +63,15 @@ class Barangku extends Component {
                                         style={{ alignItems: "center", justifyContent: "center" }}
                                         onPress={() => this.edit(data.id)}>
                                         <View style={{ flexDirection: "row", margin: 10 }}>
-                                            <Icon name='create' style={{ fontSize: 15, color: "#192a56",marginRight: 5, }} />
+                                            <Icon name='create' style={{ fontSize: 15, color: "#192a56", marginRight: 5, }} />
                                             <Text>Edit</Text>
                                         </View>
                                     </TouchableOpacity>
                                     <TouchableOpacity
                                         style={{ alignItems: "center", justifyContent: "center" }}
                                         onPress={() => this.peminat(data.id)}>
-                                         <View style={{ flexDirection: "row", margin: 10 }}>
-                                            <Icon name='eye' style={{ fontSize: 15, color: "#192a56",marginRight: 5, }} />
+                                        <View style={{ flexDirection: "row", margin: 10 }}>
+                                            <Icon name='eye' style={{ fontSize: 15, color: "#192a56", marginRight: 5, }} />
                                             <Text>{data.j}</Text>
                                         </View>
                                     </TouchableOpacity>

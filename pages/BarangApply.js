@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
-import { BackHandler, StyleSheet, Text, View, Image, Linking } from 'react-native';
+import { BackHandler, StyleSheet, Text, View, Image, Linking, TouchableOpacity } from 'react-native';
 import { Container, Content, Footer, Header, Icon, Card } from 'native-base';
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 class BarangApply extends Component {
   static navigationOptions = {
     drawerLabel: "DaftarKeinginann",
     drawerIcon: ({ tintColor }) => (
-      <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+      <Icon name="md-flag" style={{ fontSize: 25, color: tintColor }} />
     )
   };
   constructor(props) {
@@ -33,7 +33,7 @@ class BarangApply extends Component {
     return (
       <Container>
         <View style={{ backgroundColor: "#dcdde1", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
-          <Appbar navigation={this.props.navigation} />
+        <Appbar navigation={this.props.navigation} tool={false} />
           <Content>
             {
               this.state.data.map((data, i) => {
@@ -41,29 +41,38 @@ class BarangApply extends Component {
                   <View style={{ marginLeft: 5, marginRight: 5 }}>
                     <Card>
                       <Text style={{ backgroundColor: "#192a56", color: "white", paddingLeft: 3 }}>{data.nama}</Text>
-                      <View style={{ marginLeft: 7 }}>
-                        {
-                          data.hasil === 'y' ?
-                            <View style={{ flexDirection: "row" }}>
-                              <Icon name="checkmark" style={{ color: "green" }} />
-                              <Text style={{ marginLeft: 5,marginRight:5, color: "black" }}>Selamat!~~</Text>
-                              <Icon name="logo-whatsapp" onPress={() => {
-                                Linking.openURL(
-                                  'http://api.whatsapp.com/send?phone=62'+data.nohp
-                                )
-                              }} style={{ color: "green" }} />
-                            </View> :
-                            data.hasil === 'not' ?
-                              <View style={{ flexDirection: "row" }}>
-                                <Icon name="timer" style={{ color: "blue" }} />
-                                <Text style={{ marginLeft: 5, color: "black" }}>Sabar, sedang menunggu proses!~~</Text>
-                              </View> :
-                              <View style={{ flexDirection: "row" }}>
-                                <Icon name="close" style={{ color: "red" }} />
-                                <Text style={{ marginLeft: 5, color: "black" }}>Mohon Maaf</Text>
+
+                      {
+                        data.hasil === 'y' ?
+                          <View>
+                            <View style={{ flexDirection: "row", marginLeft: 5, marginBottom: 2 }}>
+                              <View style={{ borderRadius: 50, backgroundColor: "green", paddingLeft: 5, paddingRight: 5 }}>
+                                <Icon name="checkmark" style={{ color: "white", fontSize: 10,marginTop: 2, }} />
                               </View>
-                        }
-                      </View>
+                              <Text style={{ marginLeft: 5, marginRight: 5, color: "black" }}>Selamat!~~</Text>
+                            </View>
+                            <TouchableOpacity onPress={() => {
+                              Linking.openURL(
+                                'http://api.whatsapp.com/send?phone=62' + data.nohp
+                              )
+                            }} style={{ backgroundColor: "#192a56", justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+                              <Text style={{ color: "white" }}>Hubungi {data.pemilik} </Text>
+                              <Icon name="logo-whatsapp" style={{ color: "white", fontSize: 10, }} />
+                            </TouchableOpacity>
+                          </View> :
+                          data.hasil === 'not' ?
+                            <View style={{ flexDirection: "row", marginLeft: 5, alignItems: "center" }}>
+                              <Icon name="timer" style={{ color: "blue", fontSize: 10 }} />
+                              <Text style={{ marginLeft: 5, color: "black" }}>Sabar, sedang menunggu proses!~~</Text>
+                            </View> :
+                            <View style={{ flexDirection: "row", marginLeft: 5, alignItems: "center" }}>
+                              <View style={{ borderRadius: 50, backgroundColor: "red", paddingLeft: 5, paddingRight: 5,paddingVertical:2 }}>
+                                <Icon name="close" style={{ color: "white", fontSize: 10 }} />
+                              </View>
+                              <Text style={{ marginLeft: 5, color: "black" }}>Mohon Maaf</Text>
+                            </View>
+                      }
+
                     </Card>
                   </View>
                 )

@@ -13,8 +13,8 @@ class EditBarang extends Component {
             kategori: "",
             deskripsi: "",
             image: [],
-            tmpImage:{},
-            jenis:"",datake:""
+            tmpImage: {},
+            jenis: "", datake: ""
         };
     }
     componentDidMount() {
@@ -25,7 +25,7 @@ class EditBarang extends Component {
         console.warn(this.state.image)
     }
     save = () => {
-        const fd = new FormData();       
+        const fd = new FormData();
         fd.append('nama', this.state.nama);
         fd.append('lokasi', this.state.lokasi);
         fd.append('deskripsi', this.state.deskripsi);
@@ -37,8 +37,8 @@ class EditBarang extends Component {
         })
         this.props.navigation.navigate('Barangku');
     }
-    
-    chooseFile = (jenis,datake) => {
+
+    chooseFile = (jenis, datake) => {
         // console.warn(jenis,datake)        
         var options = {
             quality: 0.1,
@@ -61,25 +61,25 @@ class EditBarang extends Component {
                 console.warn('User tapped custom button: ', response.customButton);
                 alert(response.customButton);
             } else {
-                let source = response.data;                           
-                this.saveImage(jenis,datake,source)                      
+                let source = response.data;
+                this.saveImage(jenis, datake, source)
             }
         })
     };
-    saveImage = (jenis,datake,source) => {     
-        const fd = new FormData();       
-        fd.append('datake', datake);       
-        fd.append('jenis', jenis);       
-        fd.append('nama', this.state.nama);       
+    saveImage = (jenis, datake, source) => {
+        const fd = new FormData();
+        fd.append('datake', datake);
+        fd.append('jenis', jenis);
+        fd.append('nama', this.state.nama);
         fd.append('id', this.props.barangEdit);
-        if(jenis==="string"){fd.append('image', "");}
-        else{fd.append('image', source);}
+        if (jenis === "string") { fd.append('image', ""); }
+        else { fd.append('image', source); }
         Axios.post(this.props.server + 'index.php/tps/updateImageBarang', fd).then((response) => {
             //console.warn(response.data)
             this.refresh();
             // this.props.navigation.navigate("EditBarang")
         })
-        
+
     }
     refresh = () => {
         Axios.get(this.props.server + 'index.php/tps/getBarangById/' + this.props.barangEdit)
@@ -103,7 +103,7 @@ class EditBarang extends Component {
     render() {
         return (
             <View>
-                <Appbar navigation={this.props.navigation} />
+                <Appbar navigation={this.props.navigation} tool={false} />
                 <Text>Nama</Text>
                 <TextInput
                     value={this.state.nama}
@@ -135,19 +135,19 @@ class EditBarang extends Component {
                     {
                         this.state.image.map((data, i) => {
                             return data === '' ?
-                                <View key={i} style={{justifyContent:"center",alignItems:"center"}}> 
-                                <TouchableOpacity
-                                    style={{ backgroundColor: 'red' }}
-                                    onPress={() => this.chooseFile("base",(i+1))}>
-                                    <Text style={{ color: "white" }}>Upload</Text>
-                                </TouchableOpacity>
+                                <View key={i} style={{ justifyContent: "center", alignItems: "center" }}>
+                                    <TouchableOpacity
+                                        style={{ backgroundColor: 'red' }}
+                                        onPress={() => this.chooseFile("base", (i + 1))}>
+                                        <Text style={{ color: "white" }}>Upload</Text>
+                                    </TouchableOpacity>
                                 </View> :
                                 <View key={i}>
                                     <Image source={{ uri: this.props.server + data }}
                                         style={{ width: 80, height: 80, borderRadius: 50 }} />
                                     <TouchableOpacity
                                         style={{ backgroundColor: 'red' }}
-                                        onPress={() => this.saveImage("string",(i+1),'x')}>
+                                        onPress={() => this.saveImage("string", (i + 1), 'x')}>
                                         <Text style={{ color: "white" }}>Delete</Text>
                                     </TouchableOpacity>
                                 </View>

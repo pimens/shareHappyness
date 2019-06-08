@@ -84,7 +84,7 @@ const DrawerHome = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: 'Posting Barang',
       drawerIcon: ({ tintColor }) => (
-        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+        <Icon name="add" style={{ fontSize: 25, color: tintColor }} />
       )
     }
   },
@@ -94,7 +94,7 @@ const DrawerHome = createDrawerNavigator({
     navigationOptions: {
       drawerLabel: 'My Barang',
       drawerIcon: ({ tintColor }) => (
-        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+        <Icon name="logo-buffer" style={{ fontSize: 25, color: tintColor }} />
       )
     }
   },

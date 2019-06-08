@@ -33,7 +33,7 @@ class Foto extends React.Component {
   render() {
     return (
       <View>
-        <Header style={{ backgroundColor: 'white', height: 150, }}>
+        <Header style={{ backgroundColor: '#192a56', height: 150, }}>
           <StatusBar backgroundColor="black" barStyle="light-content" />
           <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
             <Image source={{ uri: 'http://192.168.1.4/apireact/data/foto/' + this.props.userData.foto }}

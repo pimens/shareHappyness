@@ -1,7 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet, Button, AsyncStorage, View, Text, StatusBar } from 'react-native';
+import { Image, StyleSheet, Button, TouchableOpacity, View, Text, StatusBar } from 'react-native';
 import { createAppContainer, createDrawerNavigator, createStackNavigator, createSwitchNavigator, DrawerItems } from 'react-navigation'; // Version can be specified in package.json
-import { Icon, Container, Header, Content } from 'native-base';
+import { Icon, Container, Footer, Content } from 'native-base';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import SplashScreen from './pages/Splash';
@@ -15,14 +15,24 @@ import Splash from './pages/Splash';
 import Peminat from './pages/Peminat';
 import FormApply from './pages/Barang/FormApply';
 import Notifikasi from './pages/Notifikasi';
+import Logout from './pages/components/Logout';
 // import Tabs from './pages/Tab'
 const CustomContent = (props) => {
   return (
     <Container>
       <Foto />
-      <Content style={{ backgroundColor: '#1e272e' }}>
+      <Content style={{ backgroundColor: '#f1f2f6' }}>
         <DrawerItems {...props} />
       </Content>
+      <View
+        style={{
+          borderBottomColor: 'black',
+          borderBottomWidth: 1,
+          marginLeft: 5,
+          marginRight: 5
+        }}
+      />  
+      <Logout/>
     </Container>
   )
 }
@@ -90,10 +100,18 @@ const DrawerHome = createDrawerNavigator({
   },
   BarangApply: {
     screen: BarangApply,
-   
+
   },
   Notifikasi: {
     screen: Notifikasi,
+    navigationOptions: {
+      header: null,
+      drawerLabel: () => null,
+      drawerLockMode: 'locked-close'
+    }
+  },
+  Logout: {
+    screen: Logout,
     navigationOptions: {
       header: null,
       drawerLabel: () => null,
@@ -133,16 +151,16 @@ const DrawerHome = createDrawerNavigator({
     drawerCloseRoute: 'DrawerClose',
     drawerToggleRoute: 'DrawerToggle',
     contentOptions: {
-      inactiveTintColor: "white",
-      activeBackgroundColor: "black",
-      activeTintColor: '#FF9800',
+      inactiveTintColor: "#2f3542",
+      activeBackgroundColor: "#192a56",
+      activeTintColor: '#ffa801',
       labelStyle: {
-        color: "white"
+        color: "#ffa801"
       }
     }
   },
 );
-const AppStack = createStackNavigator({ Login: Login, Foto: Foto }, { headerMode: 'none' });
+const AppStack = createStackNavigator({ Login: Login, Foto: Foto}, { headerMode: 'none' });
 const Check = createSwitchNavigator(
   {
     Auth: Splash,

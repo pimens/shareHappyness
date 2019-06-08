@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
 import Axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
-import { Content, Container, Form, Item, Input, Label, Textarea } from 'native-base';
+import { Content, Container, Icon, Item, Input, Label, Textarea } from 'native-base';
 class newBarang extends Component {
     constructor(props) {
         super(props);
@@ -118,9 +118,9 @@ class newBarang extends Component {
                                             source={{ uri: data.uri }}
                                             style={{ width: 100, height: 100 }} />
                                         <TouchableOpacity
-                                            style={{ backgroundColor: 'red' }}
+                                            style={{ justifyContent:"center",alignItems:'center' }}
                                             onPress={() => this.delete(i)}>
-                                            <Text style={{ color: "white" }}>Delete</Text>
+                                            <Icon name="trash" style={{ color: "#192a56" }}/>
                                         </TouchableOpacity>
                                     </View>
 
@@ -131,17 +131,17 @@ class newBarang extends Component {
                     {
                         this.state.img.length < 5 ?
                             <TouchableOpacity
-                                style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+                                style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#192a56", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                                 onPress={this.chooseFile.bind(this)}>
-                                <Text style={{ color: "white" }}>Select Image {this.state.count + 1}</Text>
+                                <Text style={{ color: "white" }}>Select Image - {this.state.count + 1}</Text>
                             </TouchableOpacity>
                             :
                             <Text>Max 5 Image</Text>
                     }
                     <TouchableOpacity
-                        style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", borderWidth: 1, height: 25, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+                        style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#192a56", borderWidth: 1, height: 25, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                         onPress={this.save}>
-                        <Text style={{ color: "black" }}>Save Data </Text>
+                        <Text style={{ color: "white" }}>Save Data </Text>
                     </TouchableOpacity>
                 </Content>
             </Container>

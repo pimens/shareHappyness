@@ -63,6 +63,7 @@
 		F86AD2A8E1074103B9D83688 /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8164F2ABAF74D73BDFE8BED /* libRNImagePicker.a */; };
 		32924D3AFB874435ADE3938B /* libRNGoogleSignin.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 636D456A2F14446BB4DBD985 /* libRNGoogleSignin.a */; };
 		BF85FB7DD661480BBEE4C41E /* libRNImgToBase64.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C81042C9C074D57A79A2D4C /* libRNImgToBase64.a */; };
+		D2413D6047AD4AFAB091854C /* RugeBoogie-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5A4C81984990484F84ABBC7A /* RugeBoogie-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -399,6 +400,7 @@
 		636D456A2F14446BB4DBD985 /* libRNGoogleSignin.a */ = {isa = PBXFileReference; name = "libRNGoogleSignin.a"; path = "libRNGoogleSignin.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		C9BE4B62912146AF90619A1D /* RNImgToBase64.xcodeproj */ = {isa = PBXFileReference; name = "RNImgToBase64.xcodeproj"; path = "../node_modules/react-native-image-base64/ios/RNImgToBase64.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		2C81042C9C074D57A79A2D4C /* libRNImgToBase64.a */ = {isa = PBXFileReference; name = "libRNImgToBase64.a"; path = "libRNImgToBase64.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		5A4C81984990484F84ABBC7A /* RugeBoogie-Regular.ttf */ = {isa = PBXFileReference; name = "RugeBoogie-Regular.ttf"; path = "../assets/fonts/RugeBoogie-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -696,6 +698,7 @@
 				4ED0271B664B40C68FA6AF90 /* rubicon-icon-font.ttf */,
 				428AA6B8F66442D2BC8C3C0A /* SimpleLineIcons.ttf */,
 				04C90481D6FC471DBCD21327 /* Zocial.ttf */,
+				5A4C81984990484F84ABBC7A /* RugeBoogie-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1165,6 +1168,7 @@
 				C08A6654B77C4E4B9282DE71 /* rubicon-icon-font.ttf in Resources */,
 				F939C73173294E3EBC9F7721 /* SimpleLineIcons.ttf in Resources */,
 				E365D023878E4BB2A7F3DA44 /* Zocial.ttf in Resources */,
+				D2413D6047AD4AFAB091854C /* RugeBoogie-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

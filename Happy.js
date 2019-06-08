@@ -14,6 +14,7 @@ import DetailBarang from './pages/Barang/DetailBarang';
 import Splash from './pages/Splash';
 import Peminat from './pages/Peminat';
 import FormApply from './pages/Barang/FormApply';
+import Notifikasi from './pages/Notifikasi';
 // import Tabs from './pages/Tab'
 const CustomContent = (props) => {
   return (
@@ -89,15 +90,10 @@ const DrawerHome = createDrawerNavigator({
   },
   BarangApply: {
     screen: BarangApply,
-    navigationOptions: {
-      drawerLabel: 'Daftar Keinginan',
-      drawerIcon: ({ tintColor }) => (
-        <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
-      )
-    }
+   
   },
-  Login: {
-    screen: Login,
+  Notifikasi: {
+    screen: Notifikasi,
     navigationOptions: {
       header: null,
       drawerLabel: () => null,

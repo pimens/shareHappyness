@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image,Picker } from 'react-native';
 import Appbar from './components/Appbar';
 import { connect } from 'react-redux'
 import ImagePicker from 'react-native-image-picker';
 import Axios from 'axios';
 import { ScrollView } from 'react-native-gesture-handler';
+import { Content, Container, Form, Item, Input, Label, Textarea } from 'native-base';
 class newBarang extends Component {
     constructor(props) {
         super(props);
@@ -19,17 +20,17 @@ class newBarang extends Component {
         };
         // console.warn(this.props.userData)
     }
-    save = () => {      
-        const fd = new FormData();       
-        for (let i=0;i<this.state.img.length;i=i+1) {            
-            fd.append('image'+i, this.state.img[i].data);
-        }       
+    save = () => {
+        const fd = new FormData();
+        for (let i = 0; i < this.state.img.length; i = i + 1) {
+            fd.append('image' + i, this.state.img[i].data);
+        }
         fd.append('nama', this.state.nama);
         fd.append('lokasi', this.state.lokasi);
         fd.append('deskripsi', this.state.deskripsi);
         fd.append('kategori', this.state.kategori);
         fd.append('user', this.props.userData.id);
-        Axios.post(this.props.server+'index.php/tps/tesAdd', fd).then((response) => {
+        Axios.post(this.props.server + 'index.php/tps/tesAdd', fd).then((response) => {
             console.warn(response.data)
         })
         this.props.navigation.navigate('Home')
@@ -38,7 +39,7 @@ class newBarang extends Component {
         var array = [...this.state.img]; // make a separate copy of the array
         if (ind !== -1) {
             array.splice(ind, 1);
-            this.setState({ img: array, count:this.state.count-1 });
+            this.setState({ img: array, count: this.state.count - 1 });
         }
     }
     chooseFile = () => {
@@ -68,17 +69,17 @@ class newBarang extends Component {
                 tmp.push(source);
                 this.setState({
                     img: tmp,
-                    count:this.state.count+1
-                })               
+                    count: this.state.count + 1
+                })
             }
         })
     };
 
     render() {
         return (
-            <View>
+            <Container>
                 <Appbar navigation={this.props.navigation} />
-                <View>
+                <Content>
                     <TextInput
                         placeholder="Nama Barang"
                         value={this.state.nama}
@@ -89,11 +90,14 @@ class newBarang extends Component {
                         value={this.state.lokasi}
                         style={{ borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                         onChangeText={(text) => this.setState({ lokasi: text })} />
-                    <TextInput
-                        placeholder="Kategori Barang"
-                        value={this.state.kategori}
+                    <Picker
+                        selectedValue={this.state.kategori}
                         style={{ borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
-                        onChangeText={(text) => this.setState({ kategori: text })} />
+                        onValueChange={(itemValue, itemIndex) => this.setState({kategori:itemValue})}>
+                        <Picker.Item label="Kategori" value="" />
+                        <Picker.Item label="Alat" value="1" />
+                        <Picker.Item label="Mebel" value="2" />
+                    </Picker>                
                     <TextInput
                         placeholder="Deskripsi Barang"
                         value={this.state.deskripsi}
@@ -127,7 +131,7 @@ class newBarang extends Component {
                     {
                         this.state.img.length < 5 ?
                             <TouchableOpacity
-                                style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894",height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+                                style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                                 onPress={this.chooseFile.bind(this)}>
                                 <Text style={{ color: "white" }}>Select Image {this.state.count + 1}</Text>
                             </TouchableOpacity>
@@ -139,15 +143,15 @@ class newBarang extends Component {
                         onPress={this.save}>
                         <Text style={{ color: "black" }}>Save Data </Text>
                     </TouchableOpacity>
-                </View>
-            </View>
+                </Content>
+            </Container>
         );
     }
 }
 const mapStateToProps = (state) => {
     return {
         userData: state.userData,
-        server : state.server
+        server: state.server
     }
 }
 const mapDispatchToProps = (dispatch) => {

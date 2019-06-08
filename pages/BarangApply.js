@@ -5,7 +5,13 @@ import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-class BarangApply extends Component {
+class BarangApply extends Component {  
+  static navigationOptions = {
+    drawerLabel:"DaftarKeinginann",
+    drawerIcon: ({ tintColor }) => (
+      <Icon name="md-home" style={{ fontSize: 25, color: tintColor }} />
+    )
+  }; 
   constructor(props) {
     super(props);
     this.state = {
@@ -13,6 +19,7 @@ class BarangApply extends Component {
 
     };
   }
+  
   componentDidMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     this.refresh();
@@ -40,7 +47,8 @@ class BarangApply extends Component {
                       <Text>{data.nama}</Text>
                       <Text>{data.j}</Text>
                       {
-                        data.hasil === 'y' ? <Text>Berhasil</Text> : <Text>Sabar</Text>
+                        data.hasil === 'y' ? <Text>Berhasil</Text> : data.hasil ==='not' ? <Text>Belum</Text>:
+                        <Text>berhasil</Text>
                       }
                   </TouchableOpacity>
                 )

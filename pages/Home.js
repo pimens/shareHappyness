@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { BackHandler, StyleSheet, Text, View, Image } from 'react-native';
-import { Container, Content, Card,  Thumbnail, Button, Icon, Tab, Tabs } from 'native-base';
+import { BackHandler, StyleSheet, Text, View, Image, Picker, RefreshControl } from 'react-native';
+import { Container, Content, Card, Thumbnail, Button, Icon, Item, Input } from 'native-base';
 
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
@@ -12,7 +12,9 @@ class Home extends Component {
     this.state = {
       data: [],
       notif: [],
-
+      sea: '',
+      selected: 'nama',
+      refreshing: false
     };
   }
   componentDidMount() {
@@ -22,15 +24,34 @@ class Home extends Component {
   handleBackPress = () => {
     // BackHandler.exitApp()
   }
+  pickerChange = (value, index) => {
+    this.setState({
+      selected: value
+    });
+  }
   refresh = () => {
     Axios.get(this.props.server + 'index.php/home/getDataHome/' + this.props.userData.id).then((response) => {
       this.setState({ data: response.data })
     });
-    Axios.get(this.props.server + 'index.php/home/getNotifikasi/' + this.props.userData.id).then((response) => {
-      this.setState({ notif: response.data })
-      this.props.setNotif(response.data[0].j)
+    Axios.get(this.props.server + 'index.php/home/countNotifikasi/' + this.props.userData.id).then((response) => {
+      this.setState({ notif: response.data, refreshing: false })
+      this.props.setNotif(response.data.j)
       // console.warn(response.data[0].j)
     });
+  }
+  searching = (v) => {
+    if (v === '') { this.refresh() } else {
+      Axios.get(this.props.server + 'index.php/home/getDataSearching/'
+        + this.props.userData.id + '/' + this.state.selected + '/' + v).then((response) => {
+          this.setState({ data: response.data, })
+        });
+    }
+    this.setState({ sea: v, })
+
+  }
+  _onRefresh = () => {
+    this.setState({ refreshing: true });
+    this.refresh();
   }
   detail = (id) => {
     console.warn(id);
@@ -42,32 +63,65 @@ class Home extends Component {
       <Container>
         <View style={{ backgroundColor: "#bdc3c7", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
           <Appbar navigation={this.props.navigation} />
-          <Content>
+          <Content
+            refreshControl={
+              <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this._onRefresh}
+              />
+            }
+          >
+            <View style={{ backgroundColor: '#192a56' }}>
+              <View style={{ margin: 0.2 }}>
+                <Card>
+                  <View style={{ flexDirection: "row", alignItems: "center", margin: 1 }}>
+                    <Picker
+                      selectedValue={this.state.selected}
+                      style={{ height: "100%", width: "25%", }}
+                      onValueChange={(itemValue, itemIndex) => this.pickerChange(itemValue, itemIndex)}>
+                      <Picker.Item label="By" value="" />
+                      <Picker.Item label="Nama" value="nama" />
+                      <Picker.Item label="Lokasi" value="lokasi" />
+                    </Picker>
+                    <Input placeholder="Search" onChangeText={(val) => this.searching(val)} />
+                    {
+                      this.state.sea === '' ? <View></View> :
+                        <Icon name="close" onPress={() => this.setState({ sea: '' })} style={{ margin: 4 }} />
+                    }
+                    {/* <Icon name="ios-search" onPress={() => this.searching()} style={{ margin: 4 }} /> */}
+                  </View>
+                </Card>
+              </View>
+            </View>           
             <View style={{ margin: 5 }}>
+            {
+              this.state.sea === '' ? <View></View> :
+                <Text> Search for : {this.state.sea}</Text>
+            }
               {
                 this.state.data.map((data, i) => {
                   return (
                     <Card key={i}>
-                      <View style={{ flexDirection: "row", padding: 5 }}>
+                      <View style={{ flexDirection: "row", padding: 5, justifyContent: "center", alignItems: "center" }}>
                         <Thumbnail source={{ uri: this.props.server + data.image1 }} />
                         <View style={{
-                          alignItems: "center", margin: 5, flexDirection: "row", flex: 1,
-                          justifyContent: "space-between"
+                          margin: 5, flexDirection: "row", flex: 1,
+                          justifyContent: "space-between", alignItems: 'center'
                         }}>
-                          <View>
-                            <Text>{data.nama}</Text>
-                            <View style={{flexDirection:"row"}}>
-                              <Icon name="attach" style={{ fontSize: 15,marginRight: 4,}} />
+                          <View style={{ flex: 1 }}>
+                            <Text style={{ fontSize: 15, color: "black" }}>{data.nama}</Text>
+                            <View style={{ flexDirection: "row" }}>
+                              <Icon name="attach" style={{ fontSize: 15, marginRight: 4, }} />
                               <Text>{data.j}</Text>
-                              <Icon name="calendar" style={{ fontSize: 15,marginRight: 4,marginLeft: 10,}} />
+                              <Icon name="calendar" style={{ fontSize: 15, marginRight: 4, marginLeft: 10, }} />
                               <Text>{data.tanggal}</Text>
-                              <Icon name="pin" style={{ fontSize: 15,marginRight: 4,marginLeft: 10,}} />
+                              <Icon name="pin" style={{ fontSize: 15, marginRight: 4, marginLeft: 10, }} />
                               <Text>{data.lokasi}</Text>
                             </View>
                           </View>
                           <TouchableOpacity
                             onPress={() => this.detail(data.id)}
-                            style={{ margin: 15 }}>
+                            style={{ margin: 15, }}>
                             <Icon name="more" />
                           </TouchableOpacity>
                         </View>

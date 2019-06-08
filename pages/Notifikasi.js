@@ -39,7 +39,7 @@ class Notifikasi extends Component {
                       <Text>{data.j}</Text>
                       {
                         data.hasil === 'y' ? <Text>Berhasil</Text> : data.hasil ==='not' ? <Text>Belum</Text>:
-                        <Text>berhasil</Text>
+                        <Text>Belum beruntung</Text>
                       }
                   </TouchableOpacity>
                 )

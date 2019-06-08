@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
+import { Container, Card, Icon } from 'native-base';
 class Barangku extends Component {
     constructor(props) {
         super(props);
@@ -15,55 +16,72 @@ class Barangku extends Component {
         this.refresh();
     }
     refresh = () => {
-        Axios.get(this.props.server+'index.php/tps/getMyBarang/' + this.props.userData.id).then((response) => {
+        Axios.get(this.props.server + 'index.php/tps/getMyBarang/' + this.props.userData.id).then((response) => {
             // console.warn(response.data)
             this.setState({ barang: response.data })
         })
     }
     hapus = (id) => {
         console.warn('hapus', id)
-        Axios.get(this.props.server+'index.php/tps/deleteBarang/'+id).then((response) => {
-            this.refresh();            
+        Axios.get(this.props.server + 'index.php/tps/deleteBarang/' + id).then((response) => {
+            this.refresh();
         })
     }
     edit = (id) => {
-       this.props.setDataEdit(id);
-       this.props.navigation.navigate('EditBarang');
+        this.props.setDataEdit(id);
+        this.props.navigation.navigate('EditBarang');
     }
     peminat = (id) => {
         this.props.setDataEdit(id);
         this.props.navigation.navigate('Peminat');
-     }
+    }
     render() {
         return (
-            <View>
+            <Container>
                 <Appbar navigation={this.props.navigation} />
                 {
                     this.state.barang.map((data, i) => {
                         return (
-                            <View key={i}>
-                                <Text>{data.nama}</Text>
-                                <TouchableOpacity
-                                    style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
-                                    onPress={() => this.hapus(data.id)}>
-                                    <Text style={{ color: "white" }}>Hapus</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
-                                    onPress={() => this.edit(data.id)}>
-                                    <Text style={{ color: "white" }}>Edit</Text>
-                                </TouchableOpacity>
-                                <TouchableOpacity
-                                    style={{ alignItems: "center", justifyContent: "center", backgroundColor: "#00b894", height: 25, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
-                                    onPress={() => this.peminat(data.id)}>
-                                    <Text style={{ color: "white" }}>Peminat</Text>
-                                </TouchableOpacity>
-                            </View>
+                            <Card key={i}>
+                                <View style={{ flexDirection: "row", margin: 10 }}>                                    
+                                    <Text style={{ color: "black", marginLeft: 5 }}>{data.nama}</Text>
+                                </View>
+                                <View style={{ flexDirection: "row", marginLeft: 10 }}>
+                                    <Icon name='pin' style={{ fontSize: 15, }} />
+                                    <Text style={{ color: "black", marginLeft: 5 }}>{data.lokasi}</Text>
+                                </View>
+                                <View style={{ marginRight:10,flexDirection: "row",justifyContent: "space-between" }}>
+                                    <TouchableOpacity
+                                        style={{ alignItems: "center", justifyContent: "center" }}
+                                        onPress={() => this.hapus(data.id)}>
+                                         <View style={{ flexDirection: "row", margin: 10 }}>
+                                            <Icon name='trash' style={{ fontSize: 15, color: "#192a56",marginRight: 5, }} />
+                                            <Text>Delete</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={{ alignItems: "center", justifyContent: "center" }}
+                                        onPress={() => this.edit(data.id)}>
+                                        <View style={{ flexDirection: "row", margin: 10 }}>
+                                            <Icon name='create' style={{ fontSize: 15, color: "#192a56",marginRight: 5, }} />
+                                            <Text>Edit</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                    <TouchableOpacity
+                                        style={{ alignItems: "center", justifyContent: "center" }}
+                                        onPress={() => this.peminat(data.id)}>
+                                         <View style={{ flexDirection: "row", margin: 10 }}>
+                                            <Icon name='eye' style={{ fontSize: 15, color: "#192a56",marginRight: 5, }} />
+                                            <Text>{data.j}</Text>
+                                        </View>
+                                    </TouchableOpacity>
+                                </View>
+                            </Card>
                         )
                     })
                 }
                 <Text>{this.props.barangEdit.nama}</Text>
-            </View>
+            </Container>
         );
     }
 }
@@ -72,11 +90,11 @@ const mapStateToProps = (state) => {
     return {
         barangEdit: state.barangEdit,
         userData: state.userData,
-        server : state.server
+        server: state.server
     }
 }
 const mapDispatchToProps = (dispatch) => {
-    return {        
+    return {
         setDataEdit: (barangEdit) => dispatch({ type: 'EDIT_BARANG', data: barangEdit })
     }
 }

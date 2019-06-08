@@ -40,7 +40,7 @@ class Home extends Component {
     });
   }
   searching = (v) => {
-    if (v === '') { this.refresh() } else {
+    if (v === '' || this.state.sea ==='') { this.refresh() } else {
       Axios.get(this.props.server + 'index.php/home/getDataSearching/'
         + this.props.userData.id + '/' + this.state.selected + '/' + v).then((response) => {
           this.setState({ data: response.data, })
@@ -83,12 +83,11 @@ class Home extends Component {
                       <Picker.Item label="Nama" value="nama" />
                       <Picker.Item label="Lokasi" value="lokasi" />
                     </Picker>
-                    <Input placeholder="Search" onChangeText={(val) => this.searching(val)} />
+                    <Input value={this.state.sea} placeholder="Search" onChangeText={(val) => this.searching(val)} />
                     {
                       this.state.sea === '' ? <View></View> :
-                        <Icon name="close" onPress={() => this.setState({ sea: '' })} style={{ margin: 4 }} />
-                    }
-                    {/* <Icon name="ios-search" onPress={() => this.searching()} style={{ margin: 4 }} /> */}
+                        <Icon name="close" onPress={() => {this.setState({ sea: '' });this.refresh();}} style={{ margin: 4 }} />
+                    }                 
                   </View>
                 </Card>
               </View>

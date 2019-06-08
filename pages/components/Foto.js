@@ -38,10 +38,9 @@ class Foto extends React.Component {
           <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
             <Image source={{ uri: 'http://192.168.1.4/apireact/data/foto/' + this.props.userData.foto }}
               style={{ width: 80, height: 80, borderRadius: 50 }} />
-            <TouchableOpacity
-              style={{ backgroundColor: "red" }}
-              onPress={()=>this.logout()}>
-              <Text style={{ color: "white" }}>Logout</Text>
+            <TouchableOpacity>
+              
+              <Text style={{ color: "white" }}>{this.props.userData.nama}</Text>
             </TouchableOpacity>
           </View>
         </Header>

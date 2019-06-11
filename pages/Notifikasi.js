@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BackHandler, StyleSheet, Text, View, Image, Linking,TouchableOpacity } from 'react-native';
+import { BackHandler, StyleSheet, Text, View, Image, Linking, TouchableOpacity } from 'react-native';
 import { Container, Content, Footer, Header, Icon, Card } from 'native-base';
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
@@ -22,12 +22,17 @@ class Notifikasi extends Component {
       console.warn(response.data)
     })
   }
+  componentWillUnmount() {
+     Axios.get(this.props.server + 'index.php/home/changeNotif/' + this.props.userData.id).then((response) => {     
+      console.warn("notif")
+    })
+  }
   render() {
     return (
       <Container>
 
         <View style={{ backgroundColor: "#dcdde1", flex: 1, flexDirection: 'column', justifyContent: 'space-between', }}>
-        <Appbar navigation={this.props.navigation} tool={false} />         
+          <Appbar navigation={this.props.navigation} tool={false} />
           <Content>
             {
               this.state.data.map((data, i) => {
@@ -43,15 +48,15 @@ class Notifikasi extends Component {
                               </View>
                               <Text style={{ marginLeft: 5, marginRight: 5, color: "black", flex: 1 }}>
                                 Selamat! Kamu dipilih oleh {data.pemilik} sebagai orang yang berhak mendapatkan {data.nama}
-                              </Text>                             
+                              </Text>
                             </View>
                             <TouchableOpacity onPress={() => {
-                                Linking.openURL(
-                                  'http://api.whatsapp.com/send?phone=62' + data.nohp
-                                )
-                              }} style={{backgroundColor:"green",justifyContent:"center",alignItems:"center",flexDirection:"row"}}>
-                              <Text style={{color:"white"}}>Hubungi {data.pemilik} </Text> 
-                              <Icon name="logo-whatsapp" style={{ color: "white",fontSize: 10, }} />
+                              Linking.openURL(
+                                'http://api.whatsapp.com/send?phone=62' + data.nohp
+                              )
+                            }} style={{ backgroundColor: "green", justifyContent: "center", alignItems: "center", flexDirection: "row" }}>
+                              <Text style={{ color: "white" }}>Hubungi {data.pemilik} </Text>
+                              <Icon name="logo-whatsapp" style={{ color: "white", fontSize: 10, }} />
                             </TouchableOpacity>
                           </View> :
                           data.hasil === 'not' ?

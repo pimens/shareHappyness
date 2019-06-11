@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import Axios from 'axios';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import ImagePicker from 'react-native-image-picker';
+import { Content, Container, Icon } from 'native-base';
+import Appbar from '../components/Appbar';
 
 class FormApply extends Component {
     constructor(props) {
@@ -12,7 +14,7 @@ class FormApply extends Component {
             data: {},
             alasan: '',
             foto: {
-                uri: 'http://192.168.1.4/apireact/data/foto/annisa.jpg'
+                uri: 'x'
             },
             app: false
         };
@@ -65,30 +67,35 @@ class FormApply extends Component {
     }
     render() {
         return (
-            <View>
-
-                <View>
+            <Container>
+                <Appbar navigation={this.props.navigation} tool={false} />
+                <Content>
                     <TextInput
-                        placeholder="Deskripsi Barang"
+                        placeholder="Ungkapkan kondisi dan alasan mengapa kamu harus dipilih"
                         value={this.state.alasan}
                         multiline={true}
                         numberOfLines={4}
                         style={{ height: 75, borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                         onChangeText={(text) => this.setState({ alasan: text })} />
-                    <Image source={{ uri: this.state.foto.uri }}
+                    {
+                        this.state.foto.uri === 'x' ? <View></View> :
+                        <Image source={{ uri: this.state.foto.uri }}
                         style={{ width: 80, height: 80, borderRadius: 50 }} />
+                    }
+                    
                     <TouchableOpacity
                         onPress={() => this.chooseFile()}
-                        style={{ backgroundColor: "red" }}>
+                        style={{ backgroundColor: "#0097e6",flexDirection:"row",justifyContent:"center",alignItems:"center" }}>
+                        <Icon name='cloud-upload' style={{ color: "black",marginRight: 5, }} />
                         <Text>Foto Pendukung</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                        onPress={() => this.save()}
-                        style={{ backgroundColor: "red" }}>
-                        <Text>Save</Text>
-                    </TouchableOpacity>
-                </View>
-            </View>
+                </Content>
+                <TouchableOpacity
+                    onPress={() => this.save()}
+                    style={{ backgroundColor: "#0097e6",justifyContent:"center",alignItems:"center",flexDirection:"row" }}>
+                    <Text>Save</Text>
+                </TouchableOpacity>
+            </Container>
         );
     }
 }

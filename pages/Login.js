@@ -8,6 +8,7 @@ import {
   GoogleSigninButton,
   statusCodes,
 } from 'react-native-google-signin';
+import { Container } from 'native-base';
 //login jgn masukin drawer nnti passsing props aja ke logins
 class Login extends Component {
   static navigationOptions = {
@@ -28,7 +29,7 @@ class Login extends Component {
       currentUser: {},
       email: '', //enggap saja ketika dia tap button email ke ambil dari google play
       password: '',
-      d:'not'
+      d: 'not'
     };
   }
   _signIn = async () => {
@@ -40,10 +41,10 @@ class Login extends Component {
         showPlayServicesUpdateDialog: true,
       });
       const userInfo = await GoogleSignin.signIn();
-      this.setState({d:"berhasil"})
+      this.setState({ d: "berhasil" })
       console.warn(userInfo);
       // this.setState({ userInfo: userInfo });
-      
+
     } catch (error) {
       console.warn('Message', error.message);
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -98,7 +99,7 @@ class Login extends Component {
       //It is mandatory to call this method before attempting to call signIn()
       scopes: ['https://www.googleapis.com/auth/drive.readonly'],
       // Repleace with your webClientId generated from Firebase console
-      webClientId:'605323385202-b5q05o5pg67tu8gtr8lsct5p267bv2df.apps.googleusercontent.com',
+      webClientId: '605323385202-b5q05o5pg67tu8gtr8lsct5p267bv2df.apps.googleusercontent.com',
     });
 
   }
@@ -109,7 +110,7 @@ class Login extends Component {
     const fd = new FormData();
     fd.append('email', this.state.email);
     fd.append('password', this.state.password);
-    Axios.post("http://192.168.1.4/apireact/index.php/tps/login", fd)
+    Axios.post(this.props.server+"index.php/tps/login", fd)
       .then((response) => {
         if (response.data != 'gagal') {
           this.state.db.transaction(tx => {
@@ -130,31 +131,27 @@ class Login extends Component {
   }
   render() {
     return (
-      <View>
-        <View style={{ margin: 19, justifyContent: 'center', alignItems: 'center' }}>
+      <Container>
+        <View style={{ margin: 19, justifyContent: 'center', alignItems: 'center', flex:1 }}>
+        <Image source={require('../assets/logosh.png')}  />
           <TextInput
-            placeholder="Biaya"
-            value={this.state.biaya}
-            onChangeText={(text) => this.setState({ email: text })}
-          />
+            placeholder="Email"
+            value={this.state.email}
+            style={{ borderWidth: 1,width:"100%", borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+            onChangeText={(text) => this.setState({ email: text })} />
           <TextInput
-            placeholder="Paass"
-            value={this.state.biaya}
-            onChangeText={(text) => this.setState({ password: text })}
-          />
-          <TouchableOpacity
-            style={{ backgroundColor: "green" }}
-            onPress={this.loginPage}>
-            <Text style={{ color: "white" }}>Login {this.props.userData.nama} {this.state.d}</Text>
-          </TouchableOpacity>
+            placeholder="Password"
+            value={this.state.password}
+            style={{ borderWidth: 1, width:"100%",borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+            onChangeText={(text) => this.setState({ password: text })} />        
+        
           <GoogleSigninButton
-          style={{ width: 312, height: 48 }}
-          size={GoogleSigninButton.Size.Wide}
-          color={GoogleSigninButton.Color.Light}
-          onPress={this._signIn}
-        />
+            style={{ width: 312, height: 48 }}
+            size={GoogleSigninButton.Size.Wide}
+            color={GoogleSigninButton.Color.Light}
+            onPress={this.loginPage}/>
         </View>
-      </View>
+      </Container>
     );
   }
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, View, StatusBar, Text, TouchableOpacity } from 'react-native'
+import { Image, View, StatusBar, Text, ImageBackground } from 'react-native'
 import { connect } from 'react-redux'
 import { Icon, Container, Header, Content } from 'native-base';
 import { openDatabase } from 'react-native-sqlite-storage';
@@ -33,28 +33,33 @@ class Foto extends React.Component {
   render() {
     return (
       <View>
-        <Header style={{ backgroundColor: '#192a56', height: 150, }}>
-          <StatusBar backgroundColor="black" barStyle="light-content" />
-          <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
-            <Image source={{ uri: 'http://192.168.1.4/apireact/data/user/' + this.props.userData.foto }}
-              style={{ width: 80, height: 80, borderRadius: 50 }} />
-            <View style={{ flexDirection: "row", justifyContent: "space-between", }}>
-              <View style={{ margin: 5 }}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Icon name='person' style={{ marginRight: 5, fontSize: 15, color: "white" }} />
-                  <Text style={{ color: "white" }}>{this.props.userData.nama}</Text>
+        <ImageBackground
+          // source={require('../assets/ff.png')}
+          source={{ uri: 'http://sampeweweh.dx.am/backend/data/images.jpg' }}
+          style={{ width: "100%", height: 150 }}>
+          <View style={{ backgroundColor:"#192a56", height: 150, justifyContent: "center", marginLeft: 6 }}>
+            <StatusBar backgroundColor="black" barStyle="light-content" />
+            <View style={{ justifyContent: "center", alignItems: "flex-start", width: "100%" }}>
+              <Image source={{ uri: 'http://sampeweweh.dx.am/backend/data/user/' + this.props.userData.foto }}
+                style={{ width: 80, height: 80, borderRadius: 50 }} />
+              <View style={{ flexDirection: "row", justifyContent: "space-between", }}>
+                <View style={{ margin: 5 }}>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Icon name='person' style={{ marginRight: 5, fontSize: 15, color: "black" }} />
+                    <Text style={{ color: "black" }}>{this.props.userData.nama}</Text>
+                  </View>
+                  <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Icon name='pin' style={{ marginRight: 5, fontSize: 15, color: "black" }} />
+                    <Text style={{ color: "black" }}>{this.props.userData.lokasi}</Text>
+                  </View>
                 </View>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  <Icon name='pin' style={{ marginRight: 5, fontSize: 15, color: "white" }} />
-                  <Text style={{ color: "white" }}>{this.props.userData.lokasi}</Text>
+                <View style={{ margin: 5, alignItems: "center" }}>
+                  <Icon onPress={() => this.props.navigation.navigate("EditProfil")} name='settings' style={{ margin: 5, fontSize: 15, color: "black" }} />
                 </View>
-              </View>
-              <View style={{margin:5,alignItems:"center"}}>
-                <Icon name='settings' style={{ margin: 5, fontSize: 15, color: "white" }} />
               </View>
             </View>
           </View>
-        </Header>
+        </ImageBackground>
       </View>
     )
   }

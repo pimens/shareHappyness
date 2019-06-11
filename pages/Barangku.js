@@ -12,7 +12,7 @@ class Barangku extends Component {
         };
     }
     componentDidMount() {
-        // console.warn(this.props)
+        console.warn(this.props.userData.id)
         this.refresh();
     }
     refresh = () => {
@@ -67,14 +67,27 @@ class Barangku extends Component {
                                             <Text>Edit</Text>
                                         </View>
                                     </TouchableOpacity>
-                                    <TouchableOpacity
-                                        style={{ alignItems: "center", justifyContent: "center" }}
-                                        onPress={() => this.peminat(data.id)}>
-                                        <View style={{ flexDirection: "row", margin: 10 }}>
-                                            <Icon name='eye' style={{ fontSize: 15, color: "#192a56", marginRight: 5, }} />
-                                            <Text>{data.j}</Text>
-                                        </View>
-                                    </TouchableOpacity>
+                                    {
+                                        data.status === '0' ?
+                                            <TouchableOpacity
+                                                style={{ alignItems: "center", justifyContent: "center" }}
+                                                onPress={() => this.peminat(data.id)}>
+                                                <View style={{ flexDirection: "row", margin: 10 }}>
+                                                    <Icon name='eye' style={{ fontSize: 15, color: "#192a56", marginRight: 5, }} />
+                                                    <Text>{data.j}</Text>
+                                                </View>
+                                            </TouchableOpacity>
+
+                                            :
+                                            <TouchableOpacity
+                                                style={{ alignItems: "center", justifyContent: "center" }}
+                                                onPress={()=>{}}>
+                                                <View style={{ flexDirection: "row", margin: 10 }}>
+                                                    <Icon name='checkmark' style={{ fontSize: 15, color: "#192a56", marginRight: 5, }} />
+                                                    <Text>{data.j}</Text>
+                                                </View>
+                                            </TouchableOpacity>
+                                    }
                                 </View>
                             </Card>
                         )

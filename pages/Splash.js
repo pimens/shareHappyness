@@ -36,7 +36,7 @@ class Splash extends React.Component {
               const fd = new FormData();
               fd.append('email', results.rows.item(0).email);
               fd.append('password', results.rows.item(0).email);
-              Axios.post("http://192.168.1.4/apireact/index.php/tps/login2", fd)
+              Axios.post(this.props.server+"index.php/tps/login2", fd)
                 .then((response) => {              
                   if(response.data==="gagal"){                //ada data log dihp tapi di api tdk ada maka dihapus   
                     console.warn("gagal cari data log 2")
@@ -61,10 +61,10 @@ class Splash extends React.Component {
       }
     render() {
         return (
-            <View style={{ flex: 1 , justifyContent: 'center' , alignItems: 'center' , backgroundColor : '#e3e3e3'}}>
+            <View style={{ flex: 1 , justifyContent: 'center' , alignItems: 'center' , backgroundColor : 'black'}}>
                 <StatusBar backgroundColor="#e3e3e3" barStyle="light-content"/> 
                 <View style={{ justifyContent: 'center' , alignItems: 'center' ,width: '50%', height: '50%',borderRadius:30}}>
-                <Image source={require('../assets/splash.png')}  />
+                <Image source={require('../assets/ff.png')}  />
                 </View>
                 <ActivityIndicator color={'blue'}/>
             </View>

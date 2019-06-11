@@ -34,7 +34,12 @@ class Appbar extends Component {
         </View>
         <View>
           {
-            this.props.notif === '0' ? <View></View> :
+            this.props.notif === '0' ? <View>
+              <Icon onPress={() => this.props.navigation.navigate('Notifikasi')} name="notifications-outline" style={{ marginRight: 15, fontSize: 35, color: "white" }} />
+              <View style={{ borderRadius: 20, backgroundColor: "red", position: 'absolute', right: 21, top: 8, }}>
+                <Text style={{ marginLeft: 2, marginRight: 2, color: "black" }}>{this.props.notif}</Text>
+              </View>
+            </View> :
               this.props.tool === false ?
                 <View>
                   <Icon onPress={() => this.props.navigation.navigate('Notifikasi')} name="notifications-outline" style={{ marginRight: 15, fontSize: 35, color: "white" }} />

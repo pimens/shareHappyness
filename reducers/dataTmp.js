@@ -6,7 +6,7 @@ const initialState = {
     },
     barangEdit: '',
     barangDetail: '',
-    server: 'http://192.168.1.4/apireact/',
+    server: 'http://sampeweweh.dx.am/backend/',
     da: [],
     editStaf: false,
     notif: 0

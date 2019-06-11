@@ -4,10 +4,12 @@ import { Container, Content, Card, Thumbnail, Button, Icon, Item, Input } from '
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
+import FunHome from './fun/FunHome'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 class Home extends Component {
   constructor(props) {
     super(props);
+  
     this.state = {
       data: [],
       notif: [],
@@ -17,7 +19,9 @@ class Home extends Component {
     };
   }
   componentDidMount() {
+    // obj = new FunHome();
     // BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    // console.warn(obj.refresh())
     this.refresh();
   }
   handleBackPress = () => {

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image, ScrollView } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, ScrollView,Picker } from 'react-native';
 import { connect } from 'react-redux'
 import Appbar from './components/Appbar';
 import Axios from 'axios';
 import ImagePicker from 'react-native-image-picker';
+import { Container, Icon } from 'native-base';
 class EditBarang extends Component {
     constructor(props) {
         super(props);
@@ -24,6 +25,9 @@ class EditBarang extends Component {
     deleteImage = () => {
         console.warn(this.state.image)
     }
+    gobrgku = () => {
+        this.props.navigation.navigate('DaftarBarang');
+    }
     save = () => {
         const fd = new FormData();
         fd.append('nama', this.state.nama);
@@ -35,7 +39,7 @@ class EditBarang extends Component {
             console.warn(response.data)
             // this.refresh();
         })
-        this.props.navigation.navigate('Barangku');
+        this.gobrgku();
     }
 
     chooseFile = (jenis, datake) => {
@@ -102,7 +106,7 @@ class EditBarang extends Component {
     }
     render() {
         return (
-            <View>
+            <Container>
                 <Appbar navigation={this.props.navigation} tool={false} />
                 <Text>Nama</Text>
                 <TextInput
@@ -115,11 +119,19 @@ class EditBarang extends Component {
                     style={{ borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
                     onChangeText={(text) => this.setState({ lokasi: text })} />
                 <Text>Kategori</Text>
-                <TextInput
+                <Picker
+                    selectedValue={this.state.kategori}
+                    style={{ borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
+                    onValueChange={(itemValue, itemIndex) => this.setState({ kategori: itemValue })}>
+                    <Picker.Item label="Kategori" value="" />
+                    <Picker.Item label="Alat" value="1" />
+                    <Picker.Item label="Mebel" value="2" />
+                </Picker>
+                {/* <TextInput
                     placeholder="Kategori Barang"
                     value={this.state.kategori}
                     style={{ borderWidth: 1, borderColor: "#2d3436", margin: 2, borderRadius: 10, borderRightWidth: 5 }}
-                    onChangeText={(text) => this.setState({ kategori: text })} />
+                    onChangeText={(text) => this.setState({ kategori: text })} /> */}
                 <Text>Deskripsi</Text>
                 <TextInput
                     placeholder="Deskripsi Barang"
@@ -135,20 +147,20 @@ class EditBarang extends Component {
                     {
                         this.state.image.map((data, i) => {
                             return data === '' ?
-                                <View key={i} style={{ justifyContent: "center", alignItems: "center" }}>
+                                <View key={i} style={{ justifyContent: "center", }}>
                                     <TouchableOpacity
-                                        style={{ backgroundColor: 'red' }}
+                                        style={{ justifyContent: "center", alignItems: "center", padding: 10 }}
                                         onPress={() => this.chooseFile("base", (i + 1))}>
-                                        <Text style={{ color: "white" }}>Upload</Text>
+                                        <Icon name='cloud-upload' style={{ color: "black" }} />
                                     </TouchableOpacity>
                                 </View> :
                                 <View key={i}>
                                     <Image source={{ uri: this.props.server + data }}
                                         style={{ width: 80, height: 80, borderRadius: 50 }} />
                                     <TouchableOpacity
-                                        style={{ backgroundColor: 'red' }}
+                                        style={{ justifyContent: "center", alignItems: "center" }}
                                         onPress={() => this.saveImage("string", (i + 1), 'x')}>
-                                        <Text style={{ color: "white" }}>Delete</Text>
+                                        <Icon name='trash' style={{ color: "black" }} />
                                     </TouchableOpacity>
                                 </View>
                         })
@@ -156,12 +168,14 @@ class EditBarang extends Component {
 
                 </ScrollView>
                 <TouchableOpacity
-                    style={{ backgroundColor: 'red' }}
+                    style={{ backgroundColor: '#192a56', height: "15%", justifyContent: "center", alignItems: "center" }}
                     onPress={() => this.save()}>
-                    <Text style={{ color: "white" }}>Delete</Text>
+                    <Icon name='md-color-filter' style={{ color: "white" }} />
+
+                    {/* <Text style={{ color: "white" }}>Save</Text> */}
                 </TouchableOpacity>
 
-            </View>
+            </Container>
         );
     }
 }

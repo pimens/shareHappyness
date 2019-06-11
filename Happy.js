@@ -16,6 +16,9 @@ import Peminat from './pages/Peminat';
 import FormApply from './pages/Barang/FormApply';
 import Notifikasi from './pages/Notifikasi';
 import Logout from './pages/components/Logout';
+import EditProfil from './pages/EditProfil';
+import Credit from './pages/Credit';
+
 // import Tabs from './pages/Tab'
 const CustomContent = (props) => {
   return (
@@ -64,6 +67,9 @@ const homeStack = createStackNavigator(
     FormApply: {
       screen: FormApply,
     },
+    EditProfil: {
+      screen: EditProfil,
+    },
   },
   {
     headerMode: 'none',
@@ -97,7 +103,7 @@ const DrawerHome = createDrawerNavigator({
         <Icon name="logo-buffer" style={{ fontSize: 25, color: tintColor }} />
       )
     }
-  },
+  },  
   BarangApply: {
     screen: BarangApply,
 
@@ -116,6 +122,15 @@ const DrawerHome = createDrawerNavigator({
       header: null,
       drawerLabel: () => null,
       drawerLockMode: 'locked-close'
+    }
+  },
+  Credit: {
+    screen: Credit,
+    navigationOptions: {
+      drawerLabel: 'Creditt',
+      drawerIcon: ({ tintColor }) => (
+        <Icon name="logo-freebsd-devil" style={{ fontSize: 25, color: tintColor }} />
+      )
     }
   },
   // EditBarang: {
